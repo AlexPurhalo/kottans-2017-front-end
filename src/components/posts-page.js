@@ -5,7 +5,10 @@ import React, { Component } from 'react';
 export default class PostsPage extends Component {
 	render() {
 		return (
-			<div>Posts Page</div>
+			<div className="posts-page">
+				<h1 className="title">Posts Page</h1>
+
+			</div>
 		);
 	}
 }
