@@ -1,0 +1,12 @@
+{
+  "name": "kottans-2017-front-end$",
+  "version": "1.0.0",
+  "description": "some-description",
+  "main": "index.js",
+  "repository": "git@github.com:AlexPurhalo/kottans-2017-front-end$.git",
+  "scripts": {},
+  "author": "Alex Purhalo",
+  "license": "Abstyles",
+  "devDependencies": {},
+  "dependencies": {}
+}
