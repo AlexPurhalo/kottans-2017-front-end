@@ -1,5 +1,76 @@
 .posts-page {
-	h1.title {
-		color: blue;
+	ul.posts-list {
+		list-style: none;
+
+		li.post-item {
+			margin: 1rem auto 4rem;
+			max-width: 960px;
+
+			.title-section {
+				h1.title {
+					font-size: 1.8rem;
+				}
+
+				.votes {
+					font-size: 1.45rem;
+
+					span.plus {
+						color:  #45b545;;
+						cursor: pointer;
+					}
+
+					span.minus {
+						color: rgba(239, 63, 63, 0.88);
+						cursor: pointer;
+					}
+
+					span.plus-number {
+						color:  #45b545;;
+					}
+
+					span.minus-number {
+						color: rgba(239, 63, 63, 0.88);
+					}
+
+					span.separator {
+						margin: 0 0.8rem;
+					}
+				}
+				margin: 0  0 0.3rem 0;
+			}
+
+			.main-section {
+				p.description {
+					font-size: 1.4rem;
+				}
+			}
+
+			.additional-section {
+				margin: 0.3rem 0 0;
+
+				ul.categories {
+					h2.category {
+						font-size: 1.3rem;
+					}
+
+					span.symbol {
+						margin: 0 1rem 0 0;
+					}
+				}
+			}
+
+
+			h4.author {
+				font-size: 1.3rem;
+			}
+
+			span.symbol {
+				margin: 0 1rem 0 0;
+			}
+
+			span.create-date {
+				font-size: 1.3rem;
+			}
+		}
 	}
 }

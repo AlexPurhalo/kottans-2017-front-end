@@ -1,4 +1,45 @@
 .app {
+	@import './header';
 	@import "./posts-page";
 	@import './about-page';
 }
+
+ul {
+	padding: 0 0;
+	margin: 0 0;
+	li {
+		padding: 0 0;
+		margin: 0 0;
+	}
+}
+
+h1 {
+	padding: 0 0;
+	margin: 0 0;
+}
+
+h2 {
+	padding: 0 0;
+	margin: 0 0;
+}
+
+h4 {
+	padding: 0 0;
+	margin: 0 0;
+}
+
+p {
+	padding: 0 0;
+	margin: 0 0;
+}
+
+.right-side {
+	text-align: right;
+}
+
+ul.inline-list {
+	li.inline-block {
+		display: inline-block;
+	}
+}
+// sdfsdf
