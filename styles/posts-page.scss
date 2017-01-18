@@ -1,5 +1,8 @@
 .posts-page {
+	@import './posts-page-styles/categories';
+
 	ul.posts-list {
+		margin: 3rem 0;
 		list-style: none;
 
 		li.post-item {

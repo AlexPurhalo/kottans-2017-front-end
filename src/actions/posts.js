@@ -1,17 +1,25 @@
 // Node modules import
 import axios from 'axios';
 
+// Functions import
+import { adapteLink } from '../functions/categories';
+
 // Actions import
 import { FETCH_POSTS_SUCCESS } from '../constatnts/posts';
+
+// Import of API url
+import { API } from '../constatnts/index';
 
 // Functions import
 import { normalizePosts } from '../functions/posts';
 
-// Receives a random question
-export function fetchPosts() {
+// Receives the posts list
+export function fetchPosts(categoryName) {
+	let category = '/';
+	if (categoryName) { category += ('?category=' + adapteLink(categoryName))}
 
 	return function(dispatch) {
-		return axios.get('https://kottans-2017-back-end.herokuapp.com/posts')
+		return axios.get(`${API}/posts${category}`)
 			.then(res => dispatch(fetchPostsSuccess(res.data)));
 	}
 }

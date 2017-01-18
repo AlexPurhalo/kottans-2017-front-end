@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 
 // Actions import
 import { fetchPosts } from '../actions/posts';
+import { fetchCategories } from '../actions/categories';
 
 // Components import
+import Categories from './post-page-components/categories';
 import TitleSection from './post-page-components/title-section';
 import MainSection from './post-page-components/main-section';
 import AdditionalSection from './post-page-components/additional-section';
@@ -14,41 +16,56 @@ import AdditionalSection from './post-page-components/additional-section';
 class PostsPage extends Component {
 	componentWillMount() {
 		this.props.fetchPosts();
+		this.props.fetchCategories();
 	}
 
 	renderComponents(posts) {
 		return (
-			<ul className="posts-list">
-				{posts.map(post => {
-					return (<li className="post-item" key={post.id}>
-						<TitleSection
-							title={post.title}
-							likes={post.votes.likes}
-							dislikes={post.votes.dislikes}
-						/>
-						<MainSection
-							description={post.description} />
-						<AdditionalSection
-							categories={post.categories}
-							author={post.author}
-							date={post.date} />
-					</li>);
-				})}
-			</ul>
+			<div>
+				<Categories
+					categories={this.props.categories}
+					fetchPosts={this.props.fetchPosts} />
+				<div className="container">
+					<ul className="posts-list">
+						{posts.map(post => {
+							return (<li className="post-item" key={post.id}>
+								<TitleSection
+									title={post.title}
+									likes={post.votes.likes}
+									dislikes={post.votes.dislikes}
+								/>
+								<MainSection
+									description={post.description} />
+								<AdditionalSection
+									categories={post.categories}
+									author={post.author}
+									date={post.date} />
+							</li>);
+						})}
+					</ul>
+				</div>
+			</div>
 		);
 	}
 
 	render() {
 		return (
 			<div className="posts-page">
-				{this.props.posts ? this.renderComponents(this.props.posts) : (<div>Loading...</div>)}
+				{this.props.posts && this.props.categories
+					? this.renderComponents(this.props.posts)
+					: (<div>Loading...</div>)}
 			</div>
 		);
 	}
 }
 
 // Maps the states from reducers to properties
-function mapStateToProps(state) { return { posts: state.posts.postsList } }
+function mapStateToProps(state) {
+	return {
+		posts: state.posts.postsList,
+		categories: state.categories.categoriesList
+	}
+}
 
 // Exports component and provides connection with redux stuff
-export default connect(mapStateToProps, { fetchPosts })(PostsPage);
+export default connect(mapStateToProps, { fetchPosts, fetchCategories })(PostsPage);
