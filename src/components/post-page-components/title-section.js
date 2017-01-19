@@ -14,28 +14,28 @@ export default class TitleSection extends Component {
 						<div className="votes right-side">
 							<ul className="inline-list">
 								<li className="inline-block">
-												<span className="plus">
-													+
-												</span>
+									<span className="plus">
+										+
+									</span>
 								</li>
 								<li className="inline-block">
-												<span className="plus-number">
-													{this.props.likes}
-												</span>
+									<span className="plus-number">
+										{this.props.likes}
+									</span>
 								</li>
 								<li className="inline-block">
-												<span className="separator">
-												</span>
+									<span className="separator">
+									</span>
 								</li>
 								<li className="inline-block">
-												<span className="minus-number">
-													{this.props.dislikes}
-												</span>
+									<span className="minus">
+										-
+									</span>
 								</li>
 								<li className="inline-block">
-												<span className="minus">
-													-
-												</span>
+									<span className="minus-number">
+										{this.props.dislikes}
+									</span>
 								</li>
 							</ul>
 						</div>

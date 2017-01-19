@@ -1,0 +1,36 @@
+.comments-section {
+	margin: 1.5rem 0 0;
+
+	.section-title {
+		font-size: 1.4rem;
+	}
+
+	.comments-count {
+		font-size: 1.4rem;
+		font-weight: 400;
+	}
+
+	ul.comments-list {
+		list-style: none;
+		li.comment-item {
+			margin: 0 0 1.2rem;
+			p.body {
+				font-size: 1.05rem;
+			}
+
+			h5.author {
+				color: #1f7e9a;
+				font-size: 1.1rem;
+			}
+
+			span.date {
+				color: #1f7e9a;
+				font-size: 1rem;
+				margin: 0 0 0 0.7rem;
+			}
+		}
+	}
+}
+// sdfsdfdsf sdfsdfds
+// dfsdfds
+//sdfsdfsdfosd

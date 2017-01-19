@@ -1,0 +1,93 @@
+ul.posts-list {
+	margin: 3rem 0;
+	list-style: none;
+
+	li.post-item {
+		background-color: rgba(109, 97, 97, 0.02);
+		margin: 1rem auto 4rem;
+		max-width: 1100px;
+		padding: 2rem 4rem;
+
+		.title-section {
+			h1.title {
+				font-size: 1.6rem;
+			}
+
+			.votes {
+				font-size: 1.2rem;
+
+				span.plus {
+					color:  #45b545;;
+					cursor: pointer;
+				}
+
+				span.minus {
+					color: rgba(220, 103, 103, 0.88);
+					cursor: pointer;
+				}
+
+				span.plus-number {
+					color:  #45b545;;
+				}
+
+				span.minus-number {
+					color: rgba(220, 103, 103, 0.88);
+				}
+
+				span.separator {
+					margin: 0 0.8rem;
+				}
+			}
+			margin: 0  0 0.3rem 0;
+		}
+
+		.main-section {
+			p.description {
+				font-size: 1.2rem;
+			}
+		}
+
+		.additional-section {
+			margin: 0.3rem 0 0;
+
+			ul.categories {
+				h2.category {
+					font-size: 1.25rem;
+					font-weight: 500;
+				}
+
+				h2.category.first {
+					margin: 0 0.6rem 0 0;
+				}
+
+				h2.category.center {
+					margin: 0 0.6rem;
+				}
+
+				h2.category.last {
+					margin: 0 0 0 0.6rem;
+				}
+			}
+		}
+
+
+		h4.author {
+			color: #4a6c8a;
+			font-weight: 500;
+			font-size: 1.35rem;
+		}
+
+		span.symbol {
+			color: #4a6c8a;
+			font-weight: 500;
+			margin: 0 1rem 0 0;
+		}
+
+		span.create-date {
+			color: #4a6c8a;
+			font-weight: 500;
+			font-size: 1.2rem;
+		}
+	}
+}
+//sdfsdfsdfsdk

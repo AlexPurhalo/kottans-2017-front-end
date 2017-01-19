@@ -3,20 +3,22 @@
 	text-align: center;
 
 	.greeting {
-		font-size: 2rem;
+		font-size: 2.5rem;
 		color: #FFF;
 		font-weight: 800;
-		padding: 5rem 0 1rem;
+		padding: 4rem 0 1.5rem;
+		letter-spacing: 2px;
 	}
 
 	ul.categories-list {
 		margin: 0 auto;
 		max-width: 750px;
-		padding: 0 0 5rem 0;
+		padding: 0 0 4rem 0;
+
 		li.category-item {
 			h2.name {
 				margin: 0 1rem;
-				font-size: 1.6rem;
+				font-size: 2rem;
 				font-weight: 700;
 				color: #fff;
 				cursor: pointer;
