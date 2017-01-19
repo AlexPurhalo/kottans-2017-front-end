@@ -40,7 +40,7 @@ class PostsPage extends Component {
 								categories={post.categories}
 								author={post.author}
 								date={post.date} />
-							<Comments />
+							{post.comments.length >= 1 && (<Comments comments={post.comments}/>)}
 						</li>);
 					})}
 				</ul>

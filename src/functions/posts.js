@@ -19,6 +19,20 @@ export function normalizePosts(data) {
 		return normalizedDate
 	}
 
+	function normalizeComments(comments) {
+		let normalizedComments = [], i;
+
+		for (i = 0; i < comments.length; i++) {
+			normalizedComments.push({
+				id: comments[i].id,
+				body: comments[i].body,
+				createdDate: comments[i].created_at,
+				author: comments[i].user.username
+			})
+		}
+
+		return normalizedComments
+	}
 	data.map(post => {
 		toReducer.push({
 			id: post.id,
@@ -27,7 +41,8 @@ export function normalizePosts(data) {
 			author: post.user.username,
 			categories: post.categories.map(category => category.name),
 			votes: findVotes(post.votes),
-			date: normalizeCreateDate(post.created_at)
+			date: normalizeCreateDate(post.created_at),
+			comments: normalizeComments(post.comments)
 		})
 	});
 
