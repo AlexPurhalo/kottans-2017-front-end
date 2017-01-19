@@ -5,10 +5,10 @@ import axios from 'axios';
 import { adapteLink } from '../functions/categories';
 
 // Actions import
-import { FETCH_POSTS_SUCCESS } from '../constatnts/posts';
+import { FETCH_POSTS_SUCCESS } from '../constants/posts';
 
 // Import of API url
-import { API } from '../constatnts/index';
+import { API } from '../constants/index';
 
 // Functions import
 import { normalizePosts } from '../functions/posts';

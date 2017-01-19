@@ -2,7 +2,7 @@
 export const INITIAL_STATE = { categoriesList: null };
 
 // Action types import
-import { FETCH_CATEGORIES_SUCCESS } from '../constatnts/categories';
+import { FETCH_CATEGORIES_SUCCESS } from '../constants/categories';
 
 // States returning after actions reducing
 export default (state = INITIAL_STATE, action) => {

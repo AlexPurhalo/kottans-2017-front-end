@@ -5,10 +5,10 @@ import axios from 'axios';
 import { normalizeCategories } from '../functions/categories';
 
 // Import of API url
-import { API } from '../constatnts/index';
+import { API } from '../constants/index';
 
 // Action types import
-import { FETCH_CATEGORIES_SUCCESS } from '../constatnts/categories';
+import { FETCH_CATEGORIES_SUCCESS } from '../constants/categories';
 
 // Receives the categories list
 export function fetchCategories() {
