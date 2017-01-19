@@ -2,35 +2,25 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
+// Components import
+import RegistrationForm from './header-components/registration';
+
 // Shows navigation bar for user
 export default class Header extends Component {
 	render() {
 		return (
 			<div className="header">
-				<nav className="navbar navbar-light">
-					<Link to="/" className="navbar-brand">Kottans</Link>
-					<ul className="nav navbar-nav">
-						<li className="nav-item">
-							<IndexLink
-								to="/"
-								className="nav-link"
-								activeClassName="active">
-								Posts
-							</IndexLink>
-						</li>
-						<li className="nav-item">
-							<Link
-								to="/users/new"
-								className="nav-link"
-								activeClassName="active">Sign Up</Link>
-						</li>
-						<li className="nav-item">
-							<Link
-								to="/sessions/new"
-								className="nav-link"
-								activeClassName="active">Sign In</Link>
-						</li>
-					</ul>
+				<nav className="navbar navbar-default">
+					<div className="container">
+						<div className="row">
+							<div className="col-md-2">
+								<Link to='/' className="brand">Kottans</Link>
+							</div>
+							<div className="col-md-10 right-side">
+								<RegistrationForm />
+							</div>
+						</div>
+					</div>
 				</nav>
 			</div>
 		);

@@ -1,3 +1,89 @@
 .header {
+	.brand {
+		font-size: 1.4rem;
+		font-weight: 500;
+		color: rgba(0, 0, 0, 0.71);
+		cursor: pointer;
 
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:active {
+			text-decoration: none;
+		}
+	}
+
+	form.registration-form {
+		margin: 0.3rem 0;
+		.sign-in-title {
+			margin: 0 0.5rem 0 0.5rem;
+			cursor: pointer;
+		}
+
+		.sign-up-title {
+			margin: 0 0.5rem 0 0.5rem;
+			cursor: pointer;
+		}
+
+		.separator {
+			margin: 0 0.3rem;
+			font-size: 1rem;
+		}
+
+		.disabled-type {
+			font-size: 1rem;
+			color: grey;
+			&:hover {
+				color: black;
+			}
+		}
+
+		.active-type {
+			font-size: 1rem;
+			font-weight: 500;
+		}
+
+		input.form-field {
+			height: 30px;
+			border-radius: 3px;
+			text-align: center;
+			border: 2px solid rgba(152, 175, 243, 0.38);
+			color: rgba(0, 0, 0, 0.64);
+		}
+
+		input.username {
+			max-width: 130px;
+			margin: 0 0.3rem 0 2rem;
+		}
+
+		input.password {
+			max-width: 160px;
+		}
+
+		input.active-sign-in {
+			border-color: rgba(243, 152, 152, 0.38);
+		}
+
+		button.submit-btn {
+			cursor: pointer;
+			padding: 0 0.7rem;
+			background-color: rgba(152, 175, 243, 0.24);
+			color: rgba(25, 22, 22, 0.37);
+			border: 2px solid rgba(152, 175, 243, 0.38);
+			border-radius: 3px;
+			height: 30px;
+			font-weight: 700;
+			margin: 0 0 0 0.3rem;
+
+			&:hover {
+				color: black;
+			}
+		}
+
+		button.active-sign-in {
+			background-color: rgba(243, 152, 203, 0.18);
+			border-color: rgba(243, 152, 152, 0.38);
+		}
+	}
 }
