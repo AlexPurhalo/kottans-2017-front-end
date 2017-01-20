@@ -1,0 +1,38 @@
+.flash-message-section {
+	margin: 0 auto;
+	color: #fff;
+
+	.message {
+		margin: 0 auto;
+		padding: 0.3rem 0;
+
+		.text {
+			font-size: 1.1rem;
+			font-weight: 500;
+		}
+
+		.close-icon {
+			width: 23px;
+			height: 23px;
+			cursor: pointer;
+		}
+	}
+}
+
+.success-message {
+	background-color: rgba(24, 215, 0, 0.47);
+	border: 1px solid #5cb85c;
+}
+
+.failure-message {
+	background-color: rgba(244, 0, 0, 0.34);
+	border: 1px solid #f30000;
+}
+
+.info-message {
+	background-color: rgba(20, 18, 225, 0.34);
+	border: 1px solid #0d80e2;
+}
+
+// sdfdsfsdf
+//sfsdfdsf
