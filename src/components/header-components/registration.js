@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Actions import
 import { postUser } from '../../actions/users'
+import { addFlashMessage, destroyFlashMessage } from '../../actions/flash-messages';
 
 // Shows Registration form for user
 class RegistrationForm extends Component {
@@ -12,7 +13,8 @@ class RegistrationForm extends Component {
 
 		this.state = {
 			signUp: true, signIn: false,
-			username: '', password: ''
+			username: '', password: '',
+			errors: []
 		};
 
 		this.activeSignInClick = this.activeSignInClick.bind(this);
@@ -35,11 +37,17 @@ class RegistrationForm extends Component {
 	sendForm(e) {
 		e.preventDefault();
 
-		if (this.state.signUp) {
-			this.props.postUser('user', 'blabla')
+		if (this.state.username.length === 0 || this.state.password.length === 0) {
+			this.props.addFlashMessage('failure-message', 'Fields can not be empty');
 		} else {
-			console.log('sign in')
+			if (this.state.signUp) {
+				this.props.postUser(this.state.username, this.state.password);
+			} else {
+
+			}
 		}
+
+
 	}
 
 	render() {
@@ -90,4 +98,4 @@ class RegistrationForm extends Component {
 	}
 }
 
-export default connect(null, { postUser })(RegistrationForm);
+export default connect(null, { postUser, addFlashMessage, destroyFlashMessage })(RegistrationForm);

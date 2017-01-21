@@ -11,7 +11,7 @@ export default class Comments extends Component {
 				</div>
 				<div className="col-md-3 right-side">
 						<span className="comments-count">
-							{commentsCount > 1 ? `${commentsCount} comment` : `${commentsCount} comments`}
+							{commentsCount > 1 ? `${commentsCount} comments` : `${commentsCount} comment`}
 						</span>
 				</div>
 			</div>
