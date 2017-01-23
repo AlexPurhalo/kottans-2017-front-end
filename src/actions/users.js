@@ -19,7 +19,9 @@ export function postUser(username, password) {
 	}
 }
 
-function postUserSuccess() {
+function postUserSuccess(data) {
+	localStorage.setItem('jwt', data.access_token);
+
 	return {
 		type: POST_USER_SUCCESS
 	}

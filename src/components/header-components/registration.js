@@ -51,6 +51,7 @@ class RegistrationForm extends Component {
 	}
 
 	render() {
+		console.log(this.props.authenticated);
 		return (
 			<form className="registration-form" onSubmit={this.sendForm}>
 				<ul className="inline-list">
@@ -98,4 +99,8 @@ class RegistrationForm extends Component {
 	}
 }
 
-export default connect(null, { postUser, addFlashMessage, destroyFlashMessage })(RegistrationForm);
+export function mapStateToProps(state) {
+	return { authenticated: state.session.authenticated }
+}
+
+export default connect(mapStateToProps, { postUser, addFlashMessage, destroyFlashMessage })(RegistrationForm);
