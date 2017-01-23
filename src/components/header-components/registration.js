@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 // Actions import
 import { postUser } from '../../actions/users'
+import { postSession, destroySession } from '../../actions/sessions';
+
 import { addFlashMessage, destroyFlashMessage } from '../../actions/flash-messages';
 
 // Shows Registration form for user
@@ -23,6 +25,7 @@ class RegistrationForm extends Component {
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
 		this.sendForm = this.sendForm.bind(this);
+		this.signOutClick = this.signOutClick.bind(this);
 	}
 
 	// Changes Registration booleans
@@ -43,15 +46,16 @@ class RegistrationForm extends Component {
 			if (this.state.signUp) {
 				this.props.postUser(this.state.username, this.state.password);
 			} else {
-
+				this.props.postSession(this.state.username, this.state.password);
 			}
 		}
-
-
 	}
 
-	render() {
-		console.log(this.props.authenticated);
+	signOutClick() {
+		this.props.destroySession();
+	}
+
+	renderAuthForm() {
 		return (
 			<form className="registration-form" onSubmit={this.sendForm}>
 				<ul className="inline-list">
@@ -97,10 +101,28 @@ class RegistrationForm extends Component {
 			</form>
 		);
 	}
+
+	userNavBar() {
+		return (
+			<div className="user-nav-bar">
+				<span
+					className="sign-out-btn"
+					onClick={this.signOutClick}>
+					SignOut
+				</span>
+			</div>
+		);
+	}
+
+	render() {
+		return <div>{this.props.authenticated ? this.userNavBar() : this.renderAuthForm()}</div>;
+	}
 }
 
 export function mapStateToProps(state) {
 	return { authenticated: state.session.authenticated }
 }
 
-export default connect(mapStateToProps, { postUser, addFlashMessage, destroyFlashMessage })(RegistrationForm);
+export default connect(mapStateToProps, {
+	postUser, addFlashMessage, destroyFlashMessage, postSession, destroySession
+})(RegistrationForm);

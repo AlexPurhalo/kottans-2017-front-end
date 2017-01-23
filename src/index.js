@@ -7,7 +7,7 @@ import { Router, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
 // Action types import
-import { POST_SESSION_SUCCESS } from './constants/sessions';
+import { AUTO_SIGN_IN } from './constants/sessions';
 
 // Routes import
 import routes from './routers';
@@ -23,7 +23,7 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore),
 	reducer_store = createStoreWithMiddleware(reducers), token = localStorage.getItem('jwt');
 
 // if token exist changes authenticated flag
-token && reducer_store.dispatch({ type: POST_SESSION_SUCCESS });
+token && reducer_store.dispatch({ type: AUTO_SIGN_IN  });
 
 ReactDOM.render(
 	<Provider store={reducer_store}>

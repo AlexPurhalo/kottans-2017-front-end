@@ -86,4 +86,18 @@
 			border-color: rgba(243, 152, 152, 0.38);
 		}
 	}
+
+	.user-nav-bar {
+		margin: 0.5rem 0;
+		.sign-out-btn {
+			cursor: pointer;
+			font-size: 1rem;
+			margin: 1rem 0;
+			color: #595252;
+
+			&:hover {
+				color: #ac6e6e;
+			}
+		}
+	}
 }
