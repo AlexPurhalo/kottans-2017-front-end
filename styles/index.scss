@@ -20,4 +20,12 @@ ul.inline-list {
 	}
 }
 
+.underline-input {
+	border: none;
+	border-bottom: solid;
+	text-align: center;
 
+	&:focus {
+		outline: none;
+	}
+}

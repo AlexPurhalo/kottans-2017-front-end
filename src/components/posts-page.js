@@ -12,6 +12,7 @@ import TitleSection from './post-page-components/title-section';
 import MainSection from './post-page-components/main-section';
 import AdditionalSection from './post-page-components/additional-section';
 import Comments from './post-page-components/comments';
+import NewPostForm from './post-page-components/new-post-form'
 
 // Main page, show posts list
 class PostsPage extends Component {
@@ -26,6 +27,7 @@ class PostsPage extends Component {
 				<Categories
 					categories={this.props.categories}
 					fetchPosts={this.props.fetchPosts} />
+				<NewPostForm />
 				<ul className="posts-list">
 					{posts.map(post => {
 						return (<li className="post-item" key={post.id}>
