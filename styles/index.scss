@@ -29,3 +29,12 @@ ul.inline-list {
 		outline: none;
 	}
 }
+
+.non-styled-btn {
+	border: 0;
+	background: transparent;
+
+	&:focus {
+		outline:0 !important;
+	};
+}

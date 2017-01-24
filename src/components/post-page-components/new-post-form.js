@@ -9,31 +9,63 @@ import CompleteMarkIcon from '../../../images/complete-mark.png';
 export default class NewPostForm extends Component {
 	constructor() {
 		super();
-		this.state = { categories: [], category: '' };
+		this.state = {
+			title: '',
+			description: '',
+			categories: [],
+			category: ''
+		};
 
 		this.addCategoryToList = this.addCategoryToList.bind(this);
 		this.handleCategoryName = this.handleCategoryName.bind(this);
+
+		this.handleTitle = this.handleTitle.bind(this);
+		this.handleDescription = this.handleDescription.bind(this);
+		this.sendForm = this.sendForm.bind(this);
+	}
+
+	handleCategoryName(e) {
+		this.setState({ category: e.target.value });
 	}
 
 	addCategoryToList() {
+		console.log('lol');
 		let arrWithNewCategory = this.state.categories;
 		arrWithNewCategory.push(this.state.category);
-
-		this.setState({ categories:  arrWithNewCategory });
+		this.setState({ categories:  arrWithNewCategory, category: '' });
 	}
 
-	handleCategoryName(e) { this.setState({ category: e.target.value }) }
+	handleTitle(e) {
+		this.setState({ title: e.target.value });
+	}
+
+	handleDescription(e) {
+		this.setState({ description: e.target.value });
+	}
+
+
+	sendForm(e) {
+		e.preventDefault();
+
+		this.props.postPost(this.state.title, this.state.description, this.state.categories);
+
+		this.setState({ description: '', title: '', category: '' });
+	}
 
 	render() {
 		return (
 			<div className="new-post-form">
 				<div className="section-title">Create your own post</div>
 				<input
+					onChange={this.handleTitle}
+					value={this.state.title}
 					type="text"
 					className="title-input underline-input post-inputs-group"
 					placeholder="Some title"/>
-				<form className="post-form">
+				<form className="post-form" onSubmit={this.sendForm}>
 					<textarea
+						onChange={this.handleDescription}
+						value={this.state.description}
 						type="text"
 						className="form-control post-input"
 						placeholder="Post Body"/>
@@ -48,22 +80,27 @@ export default class NewPostForm extends Component {
 									</li>
 								)}
 								<li className="inline-block category-input">
-									<ul className="inline-block ">
-										<li className="inline-block category">
-											<input
-
-												placeholder="Category"
-												type="text"
-												className="underline-input post-inputs-group add-category-input"/>
-										</li>
-										<li className="inline-block category">
-											<img
-												onClick={this.addCategoryToList}
-												src={CompleteMarkIcon}
-												alt="plus-icon"
-												className="add-category-icon"/>
-										</li>
-									</ul>
+									<form onSubmit={this.addCategoryToList}>
+										<ul className="inline-block ">
+											<li className="inline-block category">
+												<input
+													onChange={this.handleCategoryName}
+													value={this.state.category}
+													placeholder="Category"
+													type="text"
+													className="underline-input post-inputs-group add-category-input"/>
+											</li>
+											<li className="inline-block category">
+												<button type="submit" className="non-styled-btn">
+													<img
+														onClick={this.addCategoryToList}
+														src={CompleteMarkIcon}
+														alt="plus-icon"
+														className="add-category-icon"/>
+												</button>
+											</li>
+										</ul>
+									</form>
 								</li>
 							</ul>
 						</div>

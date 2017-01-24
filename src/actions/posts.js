@@ -5,7 +5,7 @@ import axios from 'axios';
 import { adapteLink } from '../functions/categories';
 
 // Actions import
-import { FETCH_POSTS_SUCCESS } from '../constants/posts';
+import { FETCH_POSTS_SUCCESS, POST_POST_SUCCESS, POST_POST_FAILURE } from '../constants/posts';
 
 // Import of API url
 import { API } from '../constants/index';
@@ -29,5 +29,32 @@ function fetchPostsSuccess(data) {
 	return {
 		type: FETCH_POSTS_SUCCESS,
 		payload: data
+	}
+}
+
+// Creates a new post
+export function postPost(title, description, categories) {
+
+	const data = { title: title, description: description, categories: categories},
+		headers = { headers: { 'X-User-Id': 14, 'X-Access-Token': 'e84fc8117ff419670d0690c104653def' } };
+	console.log(data);
+	return function(dispatch) {
+		return axios.post(`${API}/posts`, data, headers)
+			.then(res => dispatch(postPostSuccess(res.data)))
+			.catch(req => dispatch(postPostFailure(req.response.data.errors)));
+	}
+}
+function postPostSuccess(data) {
+	return {
+		type: POST_POST_SUCCESS,
+		payload: data
+	}
+}
+function postPostFailure(errors) {
+	console.log(errors);
+
+	return {
+		type: POST_POST_FAILURE,
+		payload: errors
 	}
 }

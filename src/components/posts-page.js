@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Actions import
-import { fetchPosts } from '../actions/posts';
+import { fetchPosts, postPost } from '../actions/posts';
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -27,7 +27,7 @@ class PostsPage extends Component {
 				<Categories
 					categories={this.props.categories}
 					fetchPosts={this.props.fetchPosts} />
-				<NewPostForm />
+				<NewPostForm postPost={this.props.postPost}/>
 				<ul className="posts-list">
 					{posts.map(post => {
 						return (<li className="post-item" key={post.id}>
@@ -70,4 +70,4 @@ function mapStateToProps(state) {
 }
 
 // Exports component and provides connection with redux stuff
-export default connect(mapStateToProps, { fetchPosts, fetchCategories })(PostsPage);
+export default connect(mapStateToProps, { fetchPosts, fetchCategories, postPost })(PostsPage);
