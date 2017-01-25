@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // Images import
 import CompleteMarkIcon from '../../../images/complete-mark.png';
+import CloseIcon from '../../../images/close-icon-black.png';
 
 // Shows form to add a new post
 export default class NewPostForm extends Component {
@@ -15,7 +16,8 @@ export default class NewPostForm extends Component {
 			categories: [],
 			category: '',
 			errors: [],
-			posted: false
+			posted: false,
+			onAddPost: false
 		};
 
 		this.addCategoryToList = this.addCategoryToList.bind(this);
@@ -25,7 +27,9 @@ export default class NewPostForm extends Component {
 		this.handleDescription = this.handleDescription.bind(this);
 		this.sendForm = this.sendForm.bind(this);
 
-		this.changePostedState = this.changePostedState.bind(this)
+		this.changePostedState = this.changePostedState.bind(this);
+
+		this.changeOnAddPostState = this.changeOnAddPostState.bind(this);
 	}
 
 	handleCategoryName(e) {
@@ -65,7 +69,17 @@ export default class NewPostForm extends Component {
 	newPostForm() {
 		return (
 			<div className="new-post-form">
-				<div className="section-title">Create your own post</div>
+				<div className="row">
+					<div className="col-md-11">
+						<div className="section-title">Create your own post</div>
+					</div>
+					<div className="col-md-1 right-side">
+						<img
+							onClick={this.changeOnAddPostState}
+							className="close-icon"
+							src={CloseIcon} alt="close-icon"/>
+					</div>
+				</div>
 				<input
 					onChange={this.handleTitle}
 					value={this.state.title}
@@ -78,7 +92,7 @@ export default class NewPostForm extends Component {
 						value={this.state.description}
 						type="text"
 						className="form-control post-input"
-						placeholder="Post Body"/>
+						placeholder="Post's body here :)"/>
 					<div className="row">
 						<div className="col-md-10">
 							<ul className="inline-list categories">
@@ -132,7 +146,7 @@ export default class NewPostForm extends Component {
 	postedMessage() {
 		return (
 			<div className="posted-message">
-				<p className="message-text">Your post was added to other, thank for your</p>
+				<p className="message-text">Your post was added to other, thank for your contribution</p>
 				<button
 					onClick={this.changePostedState}
 					className="non-styled-btn add-one-more-post-btn">Add one more</button>
@@ -140,15 +154,31 @@ export default class NewPostForm extends Component {
 		);
 	}
 
+	changeOnAddPostState() {
+		this.setState({ onAddPost: !this.state.onAddPost })
+	}
+
+	onAddPostDiv() {
+		return (
+			<div className="on-add-post-div" onClick={this.changeOnAddPostState}>
+				<p className="non-styled-btn">
+					Add a new post
+				</p>
+			</div>
+		)
+	}
+
 	render() {
-		console.log(this.state.posted);
 		return (
 			<div>
-				{this.state.posted ? this.postedMessage() : this.newPostForm()}
-				{/*{this.state.posted ? this.postedMessage() : this.newPostForm()}*/}
+				{
+					this.state.onAddPost ? (
+							this.state.posted ? this.postedMessage() : this.newPostForm()
+						) : (
+							this.onAddPostDiv()
+						)
+				}
 			</div>
 		);
 	}
 }
-///sfsdfsdfdsfd
-//sdfdzsdfsdf

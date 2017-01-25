@@ -37,6 +37,7 @@ function postSessionFailure(errors) {
 // Allows to sign out
 export function destroySession() {
 	localStorage.removeItem('jwt');
+	localStorage.removeItem('userId');
 	console.log('works, action');
 	return { type: DESTROY_SESSION_SUCCESS }
 }

@@ -27,7 +27,12 @@ class PostsPage extends Component {
 				<Categories
 					categories={this.props.categories}
 					fetchPosts={this.props.fetchPosts} />
-				<NewPostForm postPost={this.props.postPost}/>
+				{this.props.allowToAddPost && (
+					<NewPostForm
+						postPost={this.props.postPost}
+					/>
+				)}
+
 				<ul className="posts-list">
 					{posts.map(post => {
 						return (<li className="post-item" key={post.id}>
@@ -65,9 +70,11 @@ class PostsPage extends Component {
 function mapStateToProps(state) {
 	return {
 		posts: state.posts.postsList,
-		categories: state.categories.categoriesList
+		categories: state.categories.categoriesList,
+		allowToAddPost: state.posts.allowToAddPost
 	}
 }
 
 // Exports component and provides connection with redux stuff
 export default connect(mapStateToProps, { fetchPosts, fetchCategories, postPost })(PostsPage);
+// fsdfdd

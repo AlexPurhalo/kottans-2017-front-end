@@ -3,10 +3,17 @@
 	max-width: 1100px;
 	padding: 1.5rem 4rem;
 	background-color: rgba(109, 97, 97, 0.02);
+	border: 1px solid rgba(0, 0, 0, 0.43);
 
-	div.section-title {
+	.section-title {
 		font-size: 1.6rem;
 		margin: 0 0 0.7rem 0;
+	}
+
+	img.close-icon {
+		cursor: pointer;
+		width: 24px;
+		height: 24px;
 	}
 
 	input.title-input {
@@ -99,4 +106,23 @@
 		}
 	}
 }
-//dfsdfsdfsdfsd
+
+.on-add-post-div {
+	margin: 1.5rem auto 1.5rem;
+	text-align: center;
+	padding: 0.5rem 4rem;
+	max-width: 1100px;
+	border-radius: 4px;
+	border: 1px solid #6079f3;
+	background-color: rgba(30, 142, 225, 0.46);
+	cursor: pointer;
+	&:hover {
+		background-color: rgba(6, 124, 212, 0.46);
+	}
+
+	p {
+		color: #fff;
+		font-size: 1.2rem;
+		font-weight: 700;
+	}
+}

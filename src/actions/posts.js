@@ -46,6 +46,8 @@ export function postPost(title, description, categories) {
 	}
 }
 function postPostSuccess(data) {
+	data = normalizePosts(data);
+
 	return {
 		type: POST_POST_SUCCESS,
 		payload: data
