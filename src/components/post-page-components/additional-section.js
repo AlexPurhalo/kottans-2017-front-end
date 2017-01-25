@@ -9,19 +9,19 @@ export default class AdditionalSection extends Component {
 			if (i === 0) {
 				categoriesHtml.push(
 					<li className="inline-block" key={i}>
-						<h2 className="category first">{categories[i]}</h2>
+						<h2 className="category first"># {categories[i]}</h2>
 					</li>
 				)
 			} else if (i === categories.length-1) {
 				categoriesHtml.push(
 					<li className="inline-block" key={i}>
-						<h2 className="category last">{categories[i]}</h2>
+						<h2 className="category last"># {categories[i]}</h2>
 					</li>
 				)
 			} else {
 				categoriesHtml.push(
 					<li className="inline-block" key={i}>
-						<h2 className="category center">{categories[i]}</h2>
+						<h2 className="category center"># {categories[i]}</h2>
 					</li>
 				)
 			}

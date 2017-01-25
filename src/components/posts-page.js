@@ -12,7 +12,8 @@ import TitleSection from './post-page-components/title-section';
 import MainSection from './post-page-components/main-section';
 import AdditionalSection from './post-page-components/additional-section';
 import Comments from './post-page-components/comments';
-import NewPostForm from './post-page-components/new-post-form'
+import NewPostForm from './post-page-components/new-post-form';
+import AddCommentForm from './post-page-components/add-comment-form';
 
 // Main page, show posts list
 class PostsPage extends Component {
@@ -48,6 +49,7 @@ class PostsPage extends Component {
 								author={post.author}
 								date={post.date} />
 							{post.comments.length >= 1 && (<Comments comments={post.comments}/>)}
+							<AddCommentForm />
 						</li>);
 					})}
 				</ul>
