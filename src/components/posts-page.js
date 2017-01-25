@@ -8,12 +8,9 @@ import { fetchCategories } from '../actions/categories';
 
 // Components import
 import Categories from './post-page-components/categories';
-import TitleSection from './post-page-components/title-section';
-import MainSection from './post-page-components/main-section';
-import AdditionalSection from './post-page-components/additional-section';
-import Comments from './post-page-components/comments';
+import SinglePost from './post-page-components/single-post';
 import NewPostForm from './post-page-components/new-post-form';
-import AddCommentForm from './post-page-components/add-comment-form';
+
 
 // Main page, show posts list
 class PostsPage extends Component {
@@ -35,23 +32,18 @@ class PostsPage extends Component {
 				)}
 
 				<ul className="posts-list">
-					{posts.map(post => {
-						return (<li className="post-item" key={post.id}>
-							<TitleSection
-								title={post.title}
-								likes={post.votes.likes}
-								dislikes={post.votes.dislikes}
-							/>
-							<MainSection
-								description={post.description} />
-							<AdditionalSection
-								categories={post.categories}
-								author={post.author}
-								date={post.date} />
-							{post.comments.length >= 1 && (<Comments comments={post.comments}/>)}
-							<AddCommentForm />
-						</li>);
-					})}
+					{posts.map(post =>
+						<SinglePost
+							key={post.id}
+							titke={post.title}
+							likes={post.votes.likes}
+							dislikes={post.votes.dislikes}
+							description={post.description}
+							categories={post.categories}
+							author={post.author}
+							date={post.date}
+							comments={post.comments} />
+					)}
 				</ul>
 			</div>
 		);
