@@ -20,6 +20,7 @@ export function postSession(username, password) {
 
 function postSessionSuccess(data) {
 	localStorage.setItem('jwt', data.access_token);
+	localStorage.setItem('userId', data.user_id);
 
 	return { type: POST_SESSION_SUCCESS }
 }

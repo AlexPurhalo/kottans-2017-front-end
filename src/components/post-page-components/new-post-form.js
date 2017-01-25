@@ -13,7 +13,9 @@ export default class NewPostForm extends Component {
 			title: '',
 			description: '',
 			categories: [],
-			category: ''
+			category: '',
+			errors: [],
+			posted: false
 		};
 
 		this.addCategoryToList = this.addCategoryToList.bind(this);
@@ -22,6 +24,8 @@ export default class NewPostForm extends Component {
 		this.handleTitle = this.handleTitle.bind(this);
 		this.handleDescription = this.handleDescription.bind(this);
 		this.sendForm = this.sendForm.bind(this);
+
+		this.changePostedState = this.changePostedState.bind(this)
 	}
 
 	handleCategoryName(e) {
@@ -29,7 +33,6 @@ export default class NewPostForm extends Component {
 	}
 
 	addCategoryToList() {
-		console.log('lol');
 		let arrWithNewCategory = this.state.categories;
 		arrWithNewCategory.push(this.state.category);
 		this.setState({ categories:  arrWithNewCategory, category: '' });
@@ -47,12 +50,19 @@ export default class NewPostForm extends Component {
 	sendForm(e) {
 		e.preventDefault();
 
-		this.props.postPost(this.state.title, this.state.description, this.state.categories);
+		let formErrors = [];
 
-		this.setState({ description: '', title: '', category: '' });
+		this.state.title.length < 1 && formErrors.push('Title is required');
+		this.state.description.length < 1 && formErrors.push('Description is required');
+		this.state.categories.length < 1 && formErrors.push('Add at last one category');
+
+		formErrors.length < 1
+			? (this.props.postPost(this.state.title, this.state.description, this.state.categories)
+			&& this.setState({ description: '', title: '', category: '', posted: true }))
+			: (this.setState({errors: formErrors}));
 	}
 
-	render() {
+	newPostForm() {
 		return (
 			<div className="new-post-form">
 				<div className="section-title">Create your own post</div>
@@ -80,27 +90,24 @@ export default class NewPostForm extends Component {
 									</li>
 								)}
 								<li className="inline-block category-input">
-									<form onSubmit={this.addCategoryToList}>
-										<ul className="inline-block ">
-											<li className="inline-block category">
-												<input
-													onChange={this.handleCategoryName}
-													value={this.state.category}
-													placeholder="Category"
-													type="text"
-													className="underline-input post-inputs-group add-category-input"/>
-											</li>
-											<li className="inline-block category">
-												<button type="submit" className="non-styled-btn">
-													<img
-														onClick={this.addCategoryToList}
-														src={CompleteMarkIcon}
-														alt="plus-icon"
-														className="add-category-icon"/>
-												</button>
-											</li>
-										</ul>
-									</form>
+									<ul className="inline-block ">
+										<li className="inline-block category">
+											<input
+												onChange={this.handleCategoryName}
+												value={this.state.category}
+												placeholder="Category"
+												type="text"
+												className="underline-input post-inputs-group add-category-input"/>
+										</li>
+										<li className="inline-block category">
+											<button onClick={this.addCategoryToList} className="non-styled-btn" type="reset">
+												<img
+													src={CompleteMarkIcon}
+													alt="plus-icon"
+													className="add-category-icon"/>
+											</button>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</div>
@@ -109,7 +116,39 @@ export default class NewPostForm extends Component {
 						</div>
 					</div>
 				</form>
+				<ul className="errors-list">
+					{this.state.errors.map(error =>
+						<li key={error} className="error"><p>{error}</p></li>
+					)}
+				</ul>
+			</div>
+		);
+	}
+
+	changePostedState() {
+		this.setState({ posted: false })
+	}
+
+	postedMessage() {
+		return (
+			<div className="posted-message">
+				<p className="message-text">Your post was added to other, thank for your</p>
+				<button
+					onClick={this.changePostedState}
+					className="non-styled-btn add-one-more-post-btn">Add one more</button>
+			</div>
+		);
+	}
+
+	render() {
+		console.log(this.state.posted);
+		return (
+			<div>
+				{this.state.posted ? this.postedMessage() : this.newPostForm()}
+				{/*{this.state.posted ? this.postedMessage() : this.newPostForm()}*/}
 			</div>
 		);
 	}
 }
+///sfsdfsdfdsfd
+//sdfdzsdfsdf

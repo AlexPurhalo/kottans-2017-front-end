@@ -36,7 +36,8 @@ function fetchPostsSuccess(data) {
 export function postPost(title, description, categories) {
 
 	const data = { title: title, description: description, categories: categories},
-		headers = { headers: { 'X-User-Id': 14, 'X-Access-Token': 'e84fc8117ff419670d0690c104653def' } };
+		headers = { headers: {
+		'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') } };
 	console.log(data);
 	return function(dispatch) {
 		return axios.post(`${API}/posts`, data, headers)
