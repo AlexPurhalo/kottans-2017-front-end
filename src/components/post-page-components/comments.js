@@ -29,7 +29,7 @@ export default class Comments extends Component {
 							<h5 className="author">{comments[i].author}</h5>
 						</li>
 						<li className="inline-block">
-							<span className="date">21:42 12.09</span>
+							<span className="date">{comments[i].createdDate}</span>
 						</li>
 					</ul>
 					<p className="body">{comments[i].body}</p>
