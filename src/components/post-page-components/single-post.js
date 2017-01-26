@@ -7,6 +7,7 @@ import MainSection from './main-section';
 import AdditionalSection from './additional-section';
 import Comments from './comments';
 import AddCommentForm from './add-comment-form';
+import EventParty from './event-group';
 
 // Shows a single post
 export default class SinglePost extends Component {
@@ -27,6 +28,7 @@ export default class SinglePost extends Component {
 					categories={this.props.categories}
 					author={this.props.author}
 					date={this.props.date} />
+				<EventParty allowParticipation={this.props.allowParticipation} />
 				{this.props.comments.length >= 1 && (
 					<Comments comments={this.props.comments} />
 				)}

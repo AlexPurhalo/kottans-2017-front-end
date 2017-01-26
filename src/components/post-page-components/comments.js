@@ -45,6 +45,7 @@ export default class Comments extends Component {
 
 		return (
 			<div className="comments-section">
+				<hr/>
 				{this.titleSection(commentsCount)}
 				<ul className="comments-list">
 					{this.mainSection(this.props.comments)}
@@ -53,4 +54,3 @@ export default class Comments extends Component {
 		);
 	}
 }
-///ffff

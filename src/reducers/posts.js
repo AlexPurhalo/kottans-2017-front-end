@@ -1,6 +1,6 @@
 // Initial states definition
 export const INITIAL_STATE = {
-	postsList: null, allowToAddPost: false, allowToAddComment: false, allowToLike: false
+	postsList: null, allowActions: false
 };
 
 // Action types import
@@ -12,13 +12,13 @@ import { POST_SESSION_SUCCESS, DESTROY_SESSION_SUCCESS, AUTO_SIGN_IN } from '../
 export default (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case AUTO_SIGN_IN:
-			return { ...state, allowToAddPost: true, allowToAddComment: true, allowToLike: true };
+			return { ...state, allowActions: true };
 		case POST_USER_SUCCESS:
-			return { ...state, allowToAddPost: true, allowToAddComment: true, allowToLike: true };
+			return { ...state, allowActions: true };
 		case POST_SESSION_SUCCESS:
-			return { ...state, allowToAddPost: true, allowToAddComment: true, allowToLike: true };
+			return { ...state, allowActions: true };
 		case DESTROY_SESSION_SUCCESS:
-			return { ...state, allowToAddPost: false, allowToAddComment: false, allowToLike: false };
+			return { ...state, allowActions: false };
 		case FETCH_POSTS_SUCCESS:
 			return { ...state, postsList: action.payload };
 		case POST_POST_SUCCESS:

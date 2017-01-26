@@ -1,0 +1,53 @@
+.event-party {
+	.title-section {
+		.title {
+			font-size: 1.4rem;
+		}
+
+		.people-count {
+			font-size: 1.3rem;
+
+		}
+	}
+
+	.users-list {
+		.user {
+			margin: 0 0.5rem 0 0;
+			font-size: 1.15rem;
+		}
+	}
+
+	.choice-section {
+		button.choice-btn {
+			cursor: pointer;
+
+			.text-li {
+				margin: 0 0.6rem 0 0;
+			}
+			.text {
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+				font-size: 1.2rem;
+			}
+
+			span.circle {
+				height: 32px;
+				width: 32px;
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+				border-radius: 50%;
+				color: #fff;
+			}
+
+			.plus {
+				background: rgba(89, 168, 237, 0.8);
+			}
+
+			.minus {
+				background: rgba(231, 65, 65, 0.8);
+			}
+		}
+	}
+}

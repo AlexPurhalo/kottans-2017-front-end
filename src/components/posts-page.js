@@ -47,7 +47,8 @@ class PostsPage extends Component {
 							postComment={this.props.postComment}
 							allowToAddComment={this.props.allowToAddComment}
 							postVote={this.props.postVote}
-							allowToLike={this.props.allowToLike} />
+							allowToLike={this.props.allowToLike}
+							allowParticipation={this.props.allowParticipation} />
 					)}
 				</ul>
 			</div>
@@ -70,9 +71,10 @@ function mapStateToProps(state) {
 	return {
 		posts: state.posts.postsList,
 		categories: state.categories.categoriesList,
-		allowToAddPost: state.posts.allowToAddPost,
-		allowToAddComment: state.posts.allowToAddComment,
-		allowToLike: state.posts.allowToLike
+		allowToAddPost: state.posts.allowActions,
+		allowToAddComment: state.posts.allowActions,
+		allowToLike: state.posts.allowActions,
+		allowParticipation: state.posts.allowActions
 	}
 }
 

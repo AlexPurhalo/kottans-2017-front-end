@@ -23,7 +23,6 @@ export function normalizePosts(data) {
 		let normalizedComments = [], i;
 
 		function normalizeCommentDate(date) {
-			console.log(date);
 			return `${date[11] + date[12] + ':' + date[14] + date[15] + ' ' + date[5] + date[6] + '.' +  date[8] + date[9]}`
 		}
 
