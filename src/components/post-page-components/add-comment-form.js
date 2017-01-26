@@ -20,7 +20,7 @@ export default class AddCommentForm extends Component {
 		e.preventDefault();
 
 		this.state.body.length > 1
-			? (this.setState({ body: '', error: '' }))
+			? (this.props.postComment(this.props.postId, this.state.body) && this.setState({ body: '', error: '' }))
 			: (this.setState({ error: 'Body is required' }))
 	}
 

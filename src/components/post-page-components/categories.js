@@ -50,7 +50,6 @@ export default class Categories extends Component {
 		return (
 			<div className="categories-section">
 				<div style={bannerStyle}>
-					<h2 className="greeting">Welcome to the our Community</h2>
 					<ul className="inline-list categories-list">
 						<li className="inline-block category-item">
 							<h2

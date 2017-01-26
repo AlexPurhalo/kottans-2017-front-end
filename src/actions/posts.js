@@ -5,7 +5,7 @@ import axios from 'axios';
 import { adapteLink } from '../functions/categories';
 
 // Actions import
-import { FETCH_POSTS_SUCCESS, POST_POST_SUCCESS, POST_POST_FAILURE } from '../constants/posts';
+import { FETCH_POSTS_SUCCESS, POST_POST_SUCCESS, POST_POST_FAILURE, POST_COMMENT_SUCCESS } from '../constants/posts';
 
 // Import of API url
 import { API } from '../constants/index';
@@ -59,5 +59,26 @@ function postPostFailure(errors) {
 	return {
 		type: POST_POST_FAILURE,
 		payload: errors
+	}
+}
+
+const headers = {
+	headers: { 'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') }
+};
+
+// Creates a new comment
+export function postComment(postId, body) {
+	const data = { body: body };
+	console.log(data);
+
+	return function(dispatch) {
+		return axios.post(`${API}/posts/${postId}/comments`, data, headers)
+			.then(res => dispatch(postCommentSuccess(res.data)))
+	}
+}
+function postCommentSuccess(data) {
+	return {
+		type: POST_COMMENT_SUCCESS,
+		payload: normalizePosts(data)
 	}
 }

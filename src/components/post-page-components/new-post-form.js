@@ -62,7 +62,7 @@ export default class NewPostForm extends Component {
 
 		formErrors.length < 1
 			? (this.props.postPost(this.state.title, this.state.description, this.state.categories)
-			&& this.setState({ description: '', title: '', category: '', posted: true }))
+			&& this.setState({ description: '', title: '', category: '', posted: true, categories: [] }))
 			: (this.setState({errors: formErrors}));
 	}
 
@@ -140,6 +140,7 @@ export default class NewPostForm extends Component {
 	}
 
 	changePostedState() {
+		console.log('aaa');
 		this.setState({ posted: false })
 	}
 
