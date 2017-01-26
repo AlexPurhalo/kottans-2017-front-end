@@ -17,28 +17,35 @@ ul.posts-list {
 			.votes {
 				font-size: 1.2rem;
 
-				span.plus {
-					color:  #45b545;;
+				li.like-post {
 					cursor: pointer;
+
+					span.plus {
+						color:  #45b545;;
+					}
+
+					span.plus-number {
+						color:  #45b545;;
+					}
 				}
 
-				span.minus {
-					color: rgba(220, 103, 103, 0.88);
+				li.dislike-post {
 					cursor: pointer;
-				}
 
-				span.plus-number {
-					color:  #45b545;;
-				}
+					span.minus {
+						color: rgba(220, 103, 103, 0.88);
+					}
 
-				span.minus-number {
-					color: rgba(220, 103, 103, 0.88);
+					span.minus-number {
+						color: rgba(220, 103, 103, 0.88);
+					}
 				}
 
 				span.separator {
 					margin: 0 0.8rem;
 				}
 			}
+
 			margin: 0  0 0.3rem 0;
 		}
 

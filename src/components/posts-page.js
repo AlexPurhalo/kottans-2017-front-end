@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Actions import
-import { fetchPosts, postPost, postComment } from '../actions/posts';
+import { fetchPosts, postPost, postComment, postVote } from '../actions/posts';
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -45,7 +45,9 @@ class PostsPage extends Component {
 							date={post.date}
 							comments={post.comments}
 							postComment={this.props.postComment}
-							allowToAddComment={this.props.allowToAddComment} />
+							allowToAddComment={this.props.allowToAddComment}
+							postVote={this.props.postVote}
+							allowToLike={this.props.allowToLike} />
 					)}
 				</ul>
 			</div>
@@ -53,7 +55,6 @@ class PostsPage extends Component {
 	}
 
 	render() {
-		console.log(this.props.allowToAddComment);
 		return (
 			<div className="posts-page">
 				{this.props.posts && this.props.categories
@@ -70,10 +71,11 @@ function mapStateToProps(state) {
 		posts: state.posts.postsList,
 		categories: state.categories.categoriesList,
 		allowToAddPost: state.posts.allowToAddPost,
-		allowToAddComment: state.posts.allowToAddComment
+		allowToAddComment: state.posts.allowToAddComment,
+		allowToLike: state.posts.allowToLike
 	}
 }
 
 // Exports component and provides connection with redux stuff
-export default connect(mapStateToProps, { fetchPosts, fetchCategories, postPost, postComment })(PostsPage);
+export default connect(mapStateToProps, { fetchPosts, fetchCategories, postPost, postComment, postVote })(PostsPage);
 ///sfpskdfsdfsdkfdkofsd

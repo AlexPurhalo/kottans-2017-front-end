@@ -17,6 +17,9 @@ export default class SinglePost extends Component {
 					title={this.props.title}
 					likes={this.props.likes}
 					dislikes={this.props.dislikes}
+					postVote={this.props.postVote}
+					postId={this.props.id}
+					allowToLike={this.props.allowToLike}
 				/>
 				<MainSection
 					description={this.props.description} />
