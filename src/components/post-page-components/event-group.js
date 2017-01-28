@@ -12,16 +12,17 @@ export default class EventGroup extends Component {
 	}
 
 	participationClick() {
+
 		this.setState({participation: !this.state.participation})
 	}
 
 	renderUsersList(users) {
 		let i = 0, usersList = [];
-
+		console.log(i);
 		for (i; i < users.length; i++) {
 			usersList.push(
 				<li className="inline-block user" key={users[i].id}>
-					{users[i].username}{i > 0 && i < users.length-1 && ','}
+					{users[i].username}{i >= 0 && i < users.length-1 && ','}
 				</li>
 			);
 		}
@@ -30,16 +31,7 @@ export default class EventGroup extends Component {
 	}
 
 	render() {
-		const users = [
-			{ username: 'alexpurhalo', id: 21},
-			{ username: 'bojo', id: 32 },
-			{ username: 'some-user', id: 1 },
-			{ username: 'lost-man', id: 22},
-			{ username: 'bigboss', id: 3},
-			{ username: 'bestbody', id: 9},
-			{ username: 'cat-dog', id: 10}
-		];
-
+		const users = this.props.eventGroup.users;
 		return (
 			<div className="event-party">
 				<hr/>
@@ -78,4 +70,3 @@ export default class EventGroup extends Component {
 		)
 	}
 }
-// sdfsdfdf

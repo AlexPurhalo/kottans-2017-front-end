@@ -46,7 +46,8 @@ export function normalizePosts(data) {
 			categories: post.categories.map(category => category.name),
 			votes: findVotes(post.votes),
 			date: normalizeCreateDate(post.created_at),
-			comments: normalizeComments(post.comments)
+			comments: normalizeComments(post.comments),
+			eventGroup: post.party
 		})
 	});
 

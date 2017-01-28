@@ -48,7 +48,8 @@ class PostsPage extends Component {
 							allowToAddComment={this.props.allowToAddComment}
 							postVote={this.props.postVote}
 							allowToLike={this.props.allowToLike}
-							allowParticipation={this.props.allowParticipation} />
+							allowParticipation={this.props.allowParticipation}
+							eventGroup={post.eventGroup} />
 					)}
 				</ul>
 			</div>

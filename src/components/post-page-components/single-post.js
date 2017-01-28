@@ -28,7 +28,12 @@ export default class SinglePost extends Component {
 					categories={this.props.categories}
 					author={this.props.author}
 					date={this.props.date} />
-				<EventParty allowParticipation={this.props.allowParticipation} />
+				{this.props.eventGroup && (
+					<EventParty
+						allowParticipation={this.props.allowParticipation}
+						eventGroup={this.props.eventGroup}
+					/>
+				)}
 				{this.props.comments.length >= 1 && (
 					<Comments comments={this.props.comments} />
 				)}
