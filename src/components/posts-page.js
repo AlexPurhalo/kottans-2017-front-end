@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Actions import
-import { fetchPosts, postPost, postComment, postVote } from '../actions/posts';
+import { fetchPosts, postPost, postComment, postVote, addUserToPartyOrRemove } from '../actions/posts';
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -49,7 +49,9 @@ class PostsPage extends Component {
 							postVote={this.props.postVote}
 							allowToLike={this.props.allowToLike}
 							allowParticipation={this.props.allowParticipation}
-							eventGroup={post.eventGroup} />
+							eventGroup={post.eventGroup}
+							addUserToPartyOrRemove={this.props.addUserToPartyOrRemove}
+							withParty={post.withParty} />
 					)}
 				</ul>
 			</div>
@@ -80,5 +82,6 @@ function mapStateToProps(state) {
 }
 
 // Exports component and provides connection with redux stuff
-export default connect(mapStateToProps, { fetchPosts, fetchCategories, postPost, postComment, postVote })(PostsPage);
-///sfpskdfsdfsdkfdkofsd
+export default connect(mapStateToProps, {
+	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove
+})(PostsPage);

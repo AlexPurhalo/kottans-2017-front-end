@@ -3,22 +3,11 @@ import React, { Component } from 'react';
 
 // Shows event's party
 export default class EventGroup extends Component {
-	constructor() {
-		super();
-
-		this.state = { participation: false };
-
-		this.participationClick = this.participationClick.bind(this);
-	}
-
-	participationClick() {
-
-		this.setState({participation: !this.state.participation})
-	}
+	participationClick = () => { this.props.addUserToPartyOrRemove(this.props.postId) };
 
 	renderUsersList(users) {
 		let i = 0, usersList = [];
-		console.log(i);
+
 		for (i; i < users.length; i++) {
 			usersList.push(
 				<li className="inline-block user" key={users[i].id}>
@@ -30,8 +19,19 @@ export default class EventGroup extends Component {
 		return usersList;
 	}
 
+	userInList() {
+		const arr = this.props.eventGroup.users, userId = localStorage.getItem('userId');
+		let userExist = false;
+
+		for (let i = 0; i < arr.length; i++) { if (arr[i].id == userId) { userExist = true } }
+
+		return userExist;
+	}
+
+
 	render() {
 		const users = this.props.eventGroup.users;
+
 		return (
 			<div className="event-party">
 				<hr/>
@@ -41,7 +41,8 @@ export default class EventGroup extends Component {
 							<div className="title">The event group</div>
 						</div>
 						<div className="col-md-3 right-side">
-							<iv className="people-count">5 people</iv>
+							<div className="people-count">{users.length > 1 && `${users.length} people`}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -54,12 +55,12 @@ export default class EventGroup extends Component {
 							<ul className="inline-list" onClick={this.participationClick}>
 								<li className="inline-block text-li">
 									<div className="text">
-										{this.state.participation ? "I won't come" : 'I will come'}
+										{this.userInList() ? "I won't come" : 'I will come'}
 									</div>
 								</li>
 								<li className="inline-block">
-								<span className={`circle ${this.state.participation ? 'minus' : 'plus'}`}>
-									{this.state.participation ? '-1' : '+1'}
+								<span className={`circle ${this.userInList() ? 'minus' : 'plus'}`}>
+									{this.userInList() ? '-1' : '+1'}
 								</span>
 								</li>
 							</ul>

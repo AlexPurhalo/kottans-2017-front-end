@@ -6,7 +6,12 @@ import { adapteLink } from '../functions/categories';
 
 // Actions import
 import {
-	FETCH_POSTS_SUCCESS, POST_POST_SUCCESS, POST_POST_FAILURE, POST_COMMENT_SUCCESS, POST_VOTE_SUCCESS
+	FETCH_POSTS_SUCCESS,
+	POST_POST_SUCCESS,
+	POST_POST_FAILURE,
+	POST_COMMENT_SUCCESS,
+	POST_VOTE_SUCCESS,
+	ADD_USER_TO_PARTY_OR_REMOVE
 } from '../constants/posts';
 
 // Import of API url
@@ -26,11 +31,9 @@ export function fetchPosts(categoryName) {
 	}
 }
 function fetchPostsSuccess(data) {
-	data = normalizePosts(data);
-
 	return {
 		type: FETCH_POSTS_SUCCESS,
-		payload: data
+		payload: normalizePosts(data)
 	}
 }
 
@@ -47,11 +50,9 @@ export function postPost(title, description, categories) {
 	}
 }
 function postPostSuccess(data) {
-	data = normalizePosts(data);
-
 	return {
 		type: POST_POST_SUCCESS,
-		payload: data
+		payload: normalizePosts(data)
 	}
 }
 function postPostFailure(errors) {
@@ -81,7 +82,7 @@ function postCommentSuccess(data) {
 	}
 }
 
-// Add a vote to post
+// Adds a vote to post
 export function postVote(postId, like) {
 	return function(dispatch) {
 		return axios.put(`${API}/posts/${postId}/votes`, { like: like }, headers)
@@ -90,9 +91,23 @@ export function postVote(postId, like) {
 	}
 }
 function postVoteSuccess(data) {
-	console.log(data);
 	return {
 		type: POST_VOTE_SUCCESS,
 		payload: normalizePosts(data)
 	}
 }
+
+// Adds a user to event group
+export function addUserToPartyOrRemove(postId) {
+	return function(dispatch) {
+		return axios.post(`${API}/posts/${postId}/party`, {}, headers)
+			.then(res => dispatch(addUserToPartyOrRemoveSuccess(res.data)))
+	}
+}
+function addUserToPartyOrRemoveSuccess(data) {
+	return {
+		type: ADD_USER_TO_PARTY_OR_REMOVE,
+		payload: normalizePosts(data)
+	}
+}
+//
