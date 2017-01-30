@@ -1,0 +1,55 @@
+.user-questions-section {
+	.title {
+		margin: 1.5rem 0 0 0;
+		font-size: 2rem;
+		letter-spacing: 3px;
+		text-align: center;
+	}
+
+	ul.user-questions-list {
+		list-style: none;
+
+		li.question-section {
+			margin: 0 0 1.5rem 0;
+
+			.question {
+				font-size: 1.35rem;
+			}
+
+			.answer {
+				font-size: 1.2rem;
+				margin: 0 0.7rem 0 0;
+			}
+
+			.edit-icon {
+				width: 20px;
+				height: 20px;
+				margin: 0 0.3rem 0 0;
+				cursor: pointer;
+			}
+
+			.remove-icon {
+				width: 20px;
+				height: 20px;
+				cursor: pointer;
+			}
+
+			form {
+				input.answer-input {
+					border-bottom: solid 2.5px;
+				}
+
+				img.apply-icon {
+					cursor: pointer;
+					width: 20px;
+					height: 20px;
+				}
+			}
+
+			.empty {
+				color: grey;
+			}
+		}
+	}
+}
+// sdfsdfsdfdokdsf

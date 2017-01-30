@@ -21,6 +21,7 @@ export function postSession(username, password) {
 function postSessionSuccess(data) {
 	localStorage.setItem('jwt', data.access_token);
 	localStorage.setItem('userId', data.user_id);
+	localStorage.setItem('username', data.username);
 
 	return { type: POST_SESSION_SUCCESS }
 }
@@ -38,7 +39,7 @@ function postSessionFailure(errors) {
 export function destroySession() {
 	localStorage.removeItem('jwt');
 	localStorage.removeItem('userId');
-	console.log('works, action');
+	localStorage.removeItem('username');
+
 	return { type: DESTROY_SESSION_SUCCESS }
 }
-
