@@ -7,6 +7,7 @@ import postsCategoriesReducer from './categories';
 import flashMessagesReducer from './flash-messages';
 import sessionReducer from './session';
 import usersReducer from './users';
+import questionsReducer from './questions';
 
 // Stage holding in combine reducers
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	categories: postsCategoriesReducer,
 	flashMessages: flashMessagesReducer,
 	session: sessionReducer,
-	users: usersReducer
+	users: usersReducer,
+	questions: questionsReducer
 });
 
 export default rootReducer;
