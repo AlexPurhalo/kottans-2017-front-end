@@ -6,13 +6,15 @@ import postsReducer from './posts';
 import postsCategoriesReducer from './categories';
 import flashMessagesReducer from './flash-messages';
 import sessionReducer from './session';
+import usersReducer from './users';
 
 // Stage holding in combine reducers
 const rootReducer = combineReducers({
 	posts: postsReducer,
 	categories: postsCategoriesReducer,
 	flashMessages: flashMessagesReducer,
-	session: sessionReducer
+	session: sessionReducer,
+	users: usersReducer
 });
 
 export default rootReducer;
