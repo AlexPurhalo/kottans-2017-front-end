@@ -13,10 +13,51 @@ class UserQuestionsPage extends Component {
 		this.props.fetchQuestions();
 	}
 
+	questionsList(answers, questions) {
+		questions = [
+			{ id: 1, body: 'Bad game 2016?' },
+			{ id: 2, body: 'Cartoon about yellow man?' },
+			{ id: 3, body: 'Center of Ukraine...' },
+			{ id: 4, body: 'Fashion is my...' },
+			{ id: 5, body: 'The most important thing in world?' }
+		];
+
+		answers = [
+			{ id: 1, body: 'profession', questionId: 4 },
+			{ id: 3, body: 'Mafia 3', questionId: 1 },
+			{ id: 7, body: 'Spanch Bob', questionId: 2 }
+		];
+
+		let resultArr = [], currentAnswer = null, i, j;
+
+		for (i = 0; i < questions.length; i++) {
+			for (j = 0; j < answers.length; j++) {
+				if (questions[i].id == answers[j].questionId) { currentAnswer = answers[j].body }
+			}
+
+			resultArr.push({ id: questions[i].id, question: questions[i].body, answer: currentAnswer });
+			currentAnswer = null
+		}
+
+		return resultArr;
+	}
+
 	render() {
-		this.props.answers && console.log(this.props.answers);
-		this.props.questions && console.log(this.props.questions);
-		return <div className="greeting">Hello World</div>;
+		// this.props.answers && console.log(this.props.answers);
+		// this.props.questions && console.log(this.props.questions);
+		console.log(this.questionsList());
+		return (
+			<div className="container">
+				<ul>
+					{this.questionsList().map(question =>
+						<li key={question.id}>
+							<div className='question'>{question.question}</div>
+							<div className="answer">{question.answer ? question.answer : 'still empty'}</div>
+						</li>
+					)}
+				</ul>
+			</div>
+		);
 	}
 }
 
