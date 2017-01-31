@@ -25,20 +25,6 @@ class UserQuestionsPage extends Component {
 	}
 
 	questionsList(answers, questions) {
-		questions = [
-			{ id: 1, body: 'Bad game 2016?' },
-			{ id: 2, body: 'Cartoon about yellow man?' },
-			{ id: 3, body: 'Center of Ukraine...' },
-			{ id: 4, body: 'Fashion is my...' },
-			{ id: 5, body: 'The most important thing in world?' }
-		];
-
-		answers = [
-			{ id: 1, body: 'profession', questionId: 4 },
-			{ id: 3, body: 'Mafia 3', questionId: 1 },
-			{ id: 7, body: 'Spanch Bob', questionId: 2 }
-		];
-
 		let resultArr = [], currentAnswer = null, answerId, i, j;
 
 		for (i = 0; i < questions.length; i++) {
@@ -126,33 +112,29 @@ class UserQuestionsPage extends Component {
 	}
 
 	render() {
-		// this.props.answers && console.log(this.props.answers);
-		// this.props.questions && console.log(this.props.questions);
-		// console.log(this.questionsList());
-		// console.log(this.state.onEditAnswer);
-		// console.log(this.state.chosenItem);
-		// console.log(this.state.chosenAnswer);
 		return (
 			<div className="container">
 				<div className="user-questions-section">
 					<div className="title">User Questions</div>
 					<ul className="user-questions-list">
-						{this.questionsList().map(question =>
-							<li className='question-section' key={question.id}>
-								<div className='question'>{question.question}</div>
-								{question.answer ? (
-										<ul className="inline-list">
-											<li className="inline-block">
-												{this.state.onEditAnswer && question.id == this.state.chosenItem
-													? this.showAnswerForm() : <div className="answer">{question.answer}</div>}
+						{this.props.answers && this.props.questions && (
+							this.questionsList(this.props.answers, this.props.questions).map(question =>
+								<li className='question-section' key={question.id}>
+									<div className='question'>{question.question}</div>
+									{question.answer ? (
+											<ul className="inline-list">
+												<li className="inline-block">
+													{this.state.onEditAnswer && question.id == this.state.chosenItem
+														? this.showAnswerForm() : <div className="answer">{question.answer}</div>}
 
-											</li>
-											{this.accountOwner() && this.renderEditButtons(question)}
-										</ul>
-									) : (
-										this.accountOwner() ? this.renderAnswerForm() : <div className="empty">still nothing</div>
-									)}
-							</li>
+												</li>
+												{this.accountOwner() && this.renderEditButtons(question)}
+											</ul>
+										) : (
+											this.accountOwner() ? this.renderAnswerForm() : <div className="empty">still nothing</div>
+										)}
+								</li>
+							)
 						)}
 					</ul>
 				</div>

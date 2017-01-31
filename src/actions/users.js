@@ -8,6 +8,9 @@ import { API } from '../constants/index';
 // Action types import
 import { POST_USER_SUCCESS, POST_USER_FAILURE, FETCH_USER_ANSWERS_SUCCESS } from '../constants/users';
 
+// Normalizes import
+import { normalizeUserAnswers } from '../functions/users';
+
 // Creates a new user
 export function postUser(username, password) {
 	const data = { username: username, bcrypted_password: bcrypt.hashSync(password)};
@@ -44,6 +47,7 @@ export function fetchUserAnswers(username) {
 }
 
 function fetchUserAnswersSuccess(data) {
+	data = normalizeUserAnswers(data);
 	return {
 		type: FETCH_USER_ANSWERS_SUCCESS,
 		payload: data
