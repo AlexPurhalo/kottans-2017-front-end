@@ -12,7 +12,8 @@ import {
 	FETCH_USER_ANSWERS_SUCCESS,
 	POST_USER_ANSWER_SUCCESS,
 	PUT_USER_ANSWER_SUCCESS,
-	DELETE_USER_ANSWER_SUCCESS
+	DELETE_USER_ANSWER_SUCCESS,
+	FETCH_USERS_SUCESS
 } from '../constants/users';
 
 // Normalizes import
@@ -111,5 +112,20 @@ function deleteUserAnswerSuccess(data) {
 	return {
 		type: DELETE_USER_ANSWER_SUCCESS,
 		payload: normalizeUserAnswers(data)
+	}
+}
+
+// Fetches the users list
+export function fetchUsers() {
+	return function(dispatch) {
+		return axios.get(`${API}/users`)
+			.then(res => dispatch(fetchUsersSuccess(res.data)))
+	}
+}
+
+function fetchUsersSuccess(data) {
+	return {
+		type: FETCH_USERS_SUCESS,
+		payload: data
 	}
 }

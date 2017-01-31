@@ -3,9 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+// Actions import
+import { fetchUsers } from '../actions/users';
+
 // Shows the users list
 class UsersListPage extends Component {
+	componentWillMount() { this.props.fetchUsers() }
+
 	render() {
+		console.log(this.props.users);
 		return (
 			<div className="users-list-page">
 				<div className="container">
@@ -14,18 +20,13 @@ class UsersListPage extends Component {
 						<div className="people-count">(9 people)</div>
 					</div>
 					<ul className="users-list">
-						<li className="user">
-							<Link to={`/users/alex/questions`} className="username">Alex</Link>
-						</li>
-						<li className="user">
-							<div className="username">Brandon</div>
-						</li>
-						<li className="user">
-							<div className="username">Dan</div>
-						</li>
-						<li className="user">
-							<div className="username">Robin</div>
-						</li>
+						{this.props.users && this.props.users.map(user =>
+							<li className="user" key={user.id}>
+								<Link to={`users/${user.username}/questions`} className="username">
+									{user.username}
+								</Link>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>
@@ -33,4 +34,12 @@ class UsersListPage extends Component {
 	}
 }
 
-export default connect(null)(UsersListPage);
+function mapStateToProps(state) {
+	return {
+		users: state.users.usersList
+	}
+}
+
+export default connect(mapStateToProps, {
+	fetchUsers
+})(UsersListPage);
