@@ -1,18 +1,27 @@
 .header {
-	.brand {
-		font-size: 1.4rem;
-		font-weight: 500;
-		color: rgba(0, 0, 0, 0.71);
-		cursor: pointer;
+	ul.nav-links {
+		.brand {
+			font-size: 1.4rem;
+			font-weight: 500;
+			color: rgba(0, 0, 0, 0.71);
+			cursor: pointer;
 
-		&:hover {
-			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+
+			&:active {
+				text-decoration: none;
+			}
 		}
 
-		&:active {
-			text-decoration: none;
+		.nav-link {
+			color: #868080;
+			margin: 0 0 0 1rem;
+			font-size: 1.3rem;
 		}
 	}
+
 
 	form.registration-form {
 		margin: 0.3rem 0;

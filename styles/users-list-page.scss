@@ -1,0 +1,30 @@
+.users-list-page {
+	.title-section {
+		margin: 1rem 0 0 0;
+		text-align: center;
+
+		color: #555a63;
+
+		.title {
+			font-size: 1.8rem;
+		}
+
+		.people-count {
+			font-size: 1.5rem;
+			color: grey;
+		}
+	}
+
+	ul.users-list {
+		list-style: none;
+
+		li.user {
+			font-size: 1.4rem;
+			color: #555a63;
+
+			.username {
+				color: #555a63;
+			}
+		}
+	}
+}

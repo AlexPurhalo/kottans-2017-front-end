@@ -14,7 +14,14 @@ export default class Header extends Component {
 					<div className="container">
 						<div className="row">
 							<div className="col-md-2">
-								<Link to='/' className="brand">Kottans</Link>
+								<ul className="inline-list nav-links">
+									<li className="inline-block nav-item">
+										<Link to='/' className="brand">Kottans</Link>
+									</li>
+									<li className="inline-block nav-item">
+										<Link to='/users' className="nav-link">Users</Link>
+									</li>
+								</ul>
 							</div>
 							<div className="col-md-10 right-side">
 								<RegistrationForm />
