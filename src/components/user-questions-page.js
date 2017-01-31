@@ -8,7 +8,7 @@ import EditIcon from '../../images/edit-icon.png';
 import RemoveIcon from '../../images/close-icon-black.png';
 
 // Actions import
-import { fetchUserAnswers, postUserAnswer } from '../actions/users';
+import { fetchUserAnswers, postUserAnswer, putUserAnswer } from '../actions/users';
 import { fetchQuestions } from '../actions/questions';
 
 // Shows a page that represents the user's questions and answers
@@ -50,7 +50,7 @@ class UserQuestionsPage extends Component {
 	addQuestion(e, question) {
 		e.preventDefault();
 		this.props.postUserAnswer(question.id, this.state.answer);
-		this.setState({ answer: '' }); /// fdfsdfsdfsd
+		this.setState({ answer: '' });
 	}
 
 	renderAnswerForm(question) {
@@ -92,7 +92,8 @@ class UserQuestionsPage extends Component {
 	updateAnswer = (e) => {
 		e.preventDefault();
 		console.log('to postAnswer action');
-		console.log({ answer_id: this.state.chosenAnswer, answer: this.state.answer });
+		console.log();
+		this.props.putUserAnswer(this.state.chosenAnswer, this.state.answer);
 		this.setState({ chosenItem: null, onEditAnswer: false, answer: '' });
 	};
 
@@ -155,5 +156,5 @@ function mapStateToProps(state) {
 
 // Exports component and connects to redux's stuff
 export default connect(mapStateToProps, {
-	fetchUserAnswers, fetchQuestions, postUserAnswer
+	fetchUserAnswers, fetchQuestions, postUserAnswer, putUserAnswer
 })(UserQuestionsPage);

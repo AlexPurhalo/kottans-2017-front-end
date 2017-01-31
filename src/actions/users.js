@@ -7,7 +7,7 @@ import { API } from '../constants/index';
 
 // Action types import
 import {
-	POST_USER_SUCCESS, POST_USER_FAILURE, FETCH_USER_ANSWERS_SUCCESS, POST_USER_ANSWER_SUCCESS
+	POST_USER_SUCCESS, POST_USER_FAILURE, FETCH_USER_ANSWERS_SUCCESS, POST_USER_ANSWER_SUCCESS, PUT_USER_ANSWER_SUCCESS
 } from '../constants/users';
 
 // Normalizes import
@@ -75,3 +75,22 @@ function postUserAnswerSuccess(data) {
 		payload: normalizeUserAnswers(data)
 	}
 }
+
+
+// Updates an answer
+export function putUserAnswer(answerId, answer) {
+	let username = localStorage.getItem('username'), data = { body: answer };
+
+	// console.log({ username: localStorage.getItem('username'), body: answer, answer_id: answerId });
+	return function(dispatch) {
+		return axios.put(`${API}/users/${username}/answers/${answerId}`, data, headers)
+			.then(res => dispatch(putUserAnswerSuccess(res.data)))
+	}
+}
+function putUserAnswerSuccess(data) {
+	return {
+		type: PUT_USER_ANSWER_SUCCESS,
+		payload: normalizeUserAnswers(data)
+	}
+}
+/// sdfds
