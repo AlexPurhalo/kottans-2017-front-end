@@ -49,8 +49,10 @@ class UserQuestionsPage extends Component {
 
 	addQuestion(e, question) {
 		e.preventDefault();
-		this.props.postUserAnswer(question.id, this.state.answer);
-		this.setState({ answer: '' });
+		if (this.state.answer.length > 0) {
+			this.props.postUserAnswer(question.id, this.state.answer);
+			this.setState({ answer: '' });
+		}
 	}
 
 	renderAnswerForm(question) {
@@ -91,10 +93,10 @@ class UserQuestionsPage extends Component {
 
 	updateAnswer = (e) => {
 		e.preventDefault();
-		console.log('to postAnswer action');
-		console.log();
-		this.props.putUserAnswer(this.state.chosenAnswer, this.state.answer);
-		this.setState({ chosenItem: null, onEditAnswer: false, answer: '' });
+		if (this.state.answer.length > 1) {
+			this.props.putUserAnswer(this.state.chosenAnswer, this.state.answer);
+			this.setState({ chosenItem: null, onEditAnswer: false, answer: '' });
+		}
 	};
 
 	handleAnswer = (e) => { this.setState({ answer: e.target.value })};
@@ -103,6 +105,7 @@ class UserQuestionsPage extends Component {
 		return (
 			<form className="answer-opened-form" onSubmit={this.updateAnswer}>
 				<input
+					autoFocus
 					type="text"
 					className="answer-input non-styled-btn"
 					onChange={this.handleAnswer}
@@ -115,27 +118,40 @@ class UserQuestionsPage extends Component {
 	}
 
 	render() {
+		const questions = this.props.questions, answers = this.props.answers;
+
 		return (
 			<div className="container">
 				<div className="user-questions-section">
-					<div className="title">User Questions</div>
+					<div className="title">
+						The Questions List
+						({questions && answers  && `${answers.length}/${questions.length}`})
+					</div>
 					<ul className="user-questions-list">
-						{this.props.answers && this.props.questions && (
-							this.questionsList(this.props.answers, this.props.questions).map(question =>
+						{answers && questions && (
+							this.questionsList(answers, questions).map(question =>
 								<li className='question-section' key={question.id}>
-									<div className='question'>{question.question}</div>
-									{question.answer ? (
-											<ul className="inline-list">
-												<li className="inline-block">
-													{this.state.onEditAnswer && question.id == this.state.chosenItem
-														? this.showAnswerForm() : <div className="answer">{question.answer}</div>}
+									<div className="row">
+										<div className="col-md-10">
+											<div className='question'>{question.question}</div>
+											{question.answer ? (
+													<ul className="inline-list">
+														<li className="inline-block">
+															{this.state.onEditAnswer && question.id == this.state.chosenItem
+																? this.showAnswerForm() : <div className="answer">{question.answer}</div>}
 
-												</li>
-												{this.accountOwner() && this.renderEditButtons(question)}
-											</ul>
-										) : (
-											this.accountOwner() ? this.renderAnswerForm(question) : <div className="empty">still nothing</div>
-										)}
+														</li>
+														{this.accountOwner() && this.renderEditButtons(question)}
+													</ul>
+												) : (
+													this.accountOwner() ? this.renderAnswerForm(question) : <div className="empty">still nothing</div>
+												)}
+										</div>
+										<div className="col-md-2 right-side">
+											# {question.id}
+										</div>
+									</div>
+									<hr/>
 								</li>
 							)
 						)}

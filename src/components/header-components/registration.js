@@ -1,6 +1,7 @@
 // Node modules import
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // Actions import
 import { postUser } from '../../actions/users'
@@ -105,11 +106,22 @@ class RegistrationForm extends Component {
 	userNavBar() {
 		return (
 			<div className="user-nav-bar">
-				<span
-					className="sign-out-btn"
-					onClick={this.signOutClick}>
-					SignOut
-				</span>
+				<ul className="inline-list">
+					<li className="inline-block">
+						<Link
+							to={`/users/${localStorage.getItem('username')}/questions`}
+							className="sign-out-btn">
+							Account
+						</Link>
+					</li>
+					<li className="inline-block">
+						<span
+							className="sign-out-btn"
+							onClick={this.signOutClick}>
+							SignOut
+						</span>
+					</li>
+				</ul>
 			</div>
 		);
 	}
