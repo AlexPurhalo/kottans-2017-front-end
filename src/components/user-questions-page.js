@@ -8,7 +8,7 @@ import EditIcon from '../../images/edit-icon.png';
 import RemoveIcon from '../../images/close-icon-black.png';
 
 // Actions import
-import { fetchUserAnswers, postUserAnswer, putUserAnswer } from '../actions/users';
+import { fetchUserAnswers, postUserAnswer, putUserAnswer, deleteUserAnswer } from '../actions/users';
 import { fetchQuestions } from '../actions/questions';
 
 // Shows a page that represents the user's questions and answers
@@ -74,9 +74,9 @@ class UserQuestionsPage extends Component {
 		this.setState({ onEditAnswer: !this.state.onEditAnswer, chosenItem: question.id, chosenAnswer: question.answerId })
 	};
 
-	removeAnswer(question) {
-		console.log(`answer to remove: ${question.answerId}`);
-	}
+	removeAnswer(question) { this.props.deleteUserAnswer(question.answerId) }
+
+
 
 	renderEditButtons(question) {
 		return [
@@ -156,5 +156,5 @@ function mapStateToProps(state) {
 
 // Exports component and connects to redux's stuff
 export default connect(mapStateToProps, {
-	fetchUserAnswers, fetchQuestions, postUserAnswer, putUserAnswer
+	fetchUserAnswers, fetchQuestions, postUserAnswer, putUserAnswer, deleteUserAnswer
 })(UserQuestionsPage);
