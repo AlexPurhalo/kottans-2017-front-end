@@ -8,7 +8,7 @@ import EditIcon from '../../images/edit-icon.png';
 import RemoveIcon from '../../images/close-icon-black.png';
 
 // Actions import
-import { fetchUserAnswers } from '../actions/users';
+import { fetchUserAnswers, postUserAnswer } from '../actions/users';
 import { fetchQuestions } from '../actions/questions';
 
 // Shows a page that represents the user's questions and answers
@@ -47,15 +47,17 @@ class UserQuestionsPage extends Component {
 		if (this.props.params.username == localStorage.getItem('username')) return true;
 	}
 
-	addQuestion(e) {
+	addQuestion(e, question) {
 		e.preventDefault();
-
+		this.props.postUserAnswer(question.id, this.state.answer);
+		this.setState({ answer: '' }); /// fdfsdfsdfsd
 	}
 
-	renderAnswerForm() {
+	renderAnswerForm(question) {
 		return (
-			<form className="answer-form" onSubmit={this.addQuestion}>
+			<form className="answer-form" onSubmit={e => this.addQuestion(e, question)}>
 				<input
+					onChange={this.handleAnswer}
 					type="text"
 					className="underline-input answer-input" />
 				<button type='submit' className="non-styled-btn">
@@ -131,7 +133,7 @@ class UserQuestionsPage extends Component {
 												{this.accountOwner() && this.renderEditButtons(question)}
 											</ul>
 										) : (
-											this.accountOwner() ? this.renderAnswerForm() : <div className="empty">still nothing</div>
+											this.accountOwner() ? this.renderAnswerForm(question) : <div className="empty">still nothing</div>
 										)}
 								</li>
 							)
@@ -153,5 +155,5 @@ function mapStateToProps(state) {
 
 // Exports component and connects to redux's stuff
 export default connect(mapStateToProps, {
-	fetchUserAnswers, fetchQuestions
+	fetchUserAnswers, fetchQuestions, postUserAnswer
 })(UserQuestionsPage);

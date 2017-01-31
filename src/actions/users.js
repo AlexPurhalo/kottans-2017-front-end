@@ -6,10 +6,17 @@ import bcrypt from 'bcrypt-nodejs';
 import { API } from '../constants/index';
 
 // Action types import
-import { POST_USER_SUCCESS, POST_USER_FAILURE, FETCH_USER_ANSWERS_SUCCESS } from '../constants/users';
+import {
+	POST_USER_SUCCESS, POST_USER_FAILURE, FETCH_USER_ANSWERS_SUCCESS, POST_USER_ANSWER_SUCCESS
+} from '../constants/users';
 
 // Normalizes import
 import { normalizeUserAnswers } from '../functions/users';
+
+// Basic header
+const headers = {
+	headers: { 'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') }
+};
 
 // Creates a new user
 export function postUser(username, password) {
@@ -47,9 +54,24 @@ export function fetchUserAnswers(username) {
 }
 
 function fetchUserAnswersSuccess(data) {
-	data = normalizeUserAnswers(data);
 	return {
 		type: FETCH_USER_ANSWERS_SUCCESS,
-		payload: data
+		payload: normalizeUserAnswers(data)
+	}
+}
+
+
+// Creates a answer for user
+export function postUserAnswer(questionId, answer) {
+	console.log({ question_id: questionId, body: answer });
+	return function(dispatch) {
+		return axios.post(`${API}/questions/${questionId}/answers`, { body: answer }, headers)
+			.then(res => dispatch(postUserAnswerSuccess(res.data)))
+	}
+}
+function postUserAnswerSuccess(data) {
+	return {
+		type: POST_USER_ANSWER_SUCCESS,
+		payload: normalizeUserAnswers(data)
 	}
 }
