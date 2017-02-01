@@ -20,10 +20,15 @@ import { API } from '../constants/index';
 // Functions import
 import { normalizePosts } from '../functions/posts';
 
+// For headers
+const headers = {
+	headers: { 'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') }
+};
+
 // Receives the posts list
 export function fetchPosts(categoryName) {
-	let category = '/';
-	if (categoryName) { category += ('?category=' + adapteLink(categoryName))}
+	let category = '?category=Events';
+	if (categoryName) { category = ('/?category=' + adapteLink(categoryName))}
 
 	return function(dispatch) {
 		return axios.get(`${API}/posts${category}`)
@@ -38,11 +43,10 @@ function fetchPostsSuccess(data) {
 }
 
 // Creates a new post
-export function postPost(title, description, categories) {
+export function postPost(title, description, withParty, category) {
 
-	const data = { title: title, description: description, categories: categories},
-		headers = { headers: {
-		'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') } };
+	const data = { title: title, description: description, with_party: withParty, categories: [category]};
+	console.log(data);
 	return function(dispatch) {
 		return axios.post(`${API}/posts`, data, headers)
 			.then(res => dispatch(postPostSuccess(res.data)))
@@ -61,10 +65,6 @@ function postPostFailure(errors) {
 		payload: errors
 	}
 }
-
-const headers = {
-	headers: { 'X-User-Id': localStorage.getItem('userId'), 'X-Access-Token': localStorage.getItem('jwt') }
-};
 
 // Creates a new comment
 export function postComment(postId, body) {

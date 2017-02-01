@@ -40,3 +40,47 @@ ul.inline-list {
 		outline:0 !important;
 	};
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline: none;
+}
+
+.checkbox {
+	width: 25px;
+	margin: 0 0.5rem 0;
+	position: relative;
+
+	label {
+		cursor: pointer;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: 0;
+		left: 0;
+		background: #eee;
+		border:1px solid #ddd;
+
+		&:after {
+			opacity: 0.2;
+			content: '';
+			position: absolute;
+			width: 8px;
+			height: 5px;
+			background: transparent;
+			top: 5px;
+			left: 5px;
+			border: 3px solid #333;
+			border-top: none;
+			border-right: none;
+
+			transform: rotate(-45deg);
+		}
+	}
+
+	input[type=checkbox]:checked + label:after {
+		opacity: 1;
+	}
+}

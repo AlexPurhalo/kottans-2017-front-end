@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Images import
-import CompleteMarkIcon from '../../../images/complete-mark.png';
 import CloseIcon from '../../../images/close-icon-black.png';
 
 // Shows form to add a new post
@@ -13,22 +12,14 @@ export default class NewPostForm extends Component {
 		this.state = {
 			title: '',
 			description: '',
-			categories: [],
-			category: '',
 			errors: [],
 			posted: false,
-			onAddPost: false
+			onAddPost: true,
+			withParty: false,
+			category: ''
 		};
 	}
 
-
-	handleCategoryName = (e) => { this.setState({ category: e.target.value }) };
-
-	addCategoryToList = () => {
-		let arrWithNewCategory = this.state.categories;
-		arrWithNewCategory.push(this.state.category);
-		this.setState({ categories:  arrWithNewCategory, category: '' });
-	};
 
 	handleTitle = (e) => { this.setState({ title: e.target.value }) };
 
@@ -40,12 +31,18 @@ export default class NewPostForm extends Component {
 		let formErrors = [];
 		this.state.title.length < 1 && formErrors.push('Title is required');
 		this.state.description.length < 1 && formErrors.push('Description is required');
-		this.state.categories.length < 1 && formErrors.push('Add at last one category');
+		this.state.category.length < 1 && formErrors.push('Choice any category');
 
 		formErrors.length < 1
-			? (this.props.postPost(this.state.title, this.state.description, this.state.categories)
-			&& this.setState({ description: '', title: '', category: '', posted: true, categories: [] }))
+			? (this.props.postPost(this.state.title, this.state.description, this.state.withParty, this.state.category)
+			&& this.setState({ description: '', title: '', posted: true, withParty: false, category: false }))
 			: (this.setState({errors: formErrors}));
+	};
+
+	changeWithPartyState = () => { this.setState({ withParty: !this.state.withParty }) };
+
+	selectCategory = (e) => {
+		this.setState({ category: e.target.value });
 	};
 
 	newPostForm() {
@@ -75,35 +72,38 @@ export default class NewPostForm extends Component {
 						type="text"
 						className="form-control post-input"
 						placeholder="Post's body here :)"/>
-					<div className="row">
-						<div className="col-md-10">
-							<ul className="inline-list categories">
-								{this.state.categories.map(category =>
-									<li className="inline-block" key={category}>
-										<div className="added-category"># {category}</div>
-									</li>
-								)}
-								<li className="inline-block category-input">
-									<ul className="inline-block ">
-										<li className="inline-block category">
+					<div className="form-bottom-elements">
+						<div className="row">
+							<div className="col-md-2">
+								<select value={this.state.value} className="category-select" onChange={this.selectCategory}>
+									<option defaultChecked>
+										choice
+									</option>
+									{this.props.categories.map(category =>
+										<option
+											value={category.name} key={category.id}>{category.name}</option>
+									)}
+								</select>
+							</div>
+							<div className="col-md-2">
+								<ul className="inline-list checkbox-list">
+									<li className="inline-block">Event</li>
+									<li className="inline-block">
+										<div className="checkbox">
 											<input
-												onChange={this.handleCategoryName}
-												value={this.state.category}
-												placeholder="Category"
-												type="text"
-												className="underline-input post-inputs-group add-category-input"/>
-										</li>
-										<li className="inline-block category">
-											<button onClick={this.addCategoryToList} className="non-styled-btn" type="reset">
-												<img src={CompleteMarkIcon} alt="plus-icon" className="add-category-icon"/>
-											</button>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div className="col-md-2 right-side">
-							<button type="submit" className="btn post-send-button">Submit</button>
+												onChange={this.changeWithPartyState}
+												type="checkbox"
+												value={this.state.withParty}
+												id="checkbox-input" />
+											<label htmlFor="checkbox-input">
+											</label>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div className="col-md-8 right-side">
+								<button type="submit" className="btn post-send-button">Submit</button>
+							</div>
 						</div>
 					</div>
 				</form>
@@ -149,3 +149,4 @@ export default class NewPostForm extends Component {
 		);
 	}
 }
+///sfsdfdsf

@@ -37,35 +37,29 @@
 		}
 
 
-		ul.categories {
-			li {
-				.added-category {
-					font-size: 1.2rem;
-					margin: 0 1rem 0 0;
-				}
-			}
-			li.category-input {
-				ul {
-					li.category {
-						input.add-category-input {
-							margin: 0.5rem 0 0 0;
-							max-width: 120px;
-							font-size: 1.2rem;
-						}
-
-						img.add-category-icon {
-							height: 24px;
-							width: 24px;
-							margin: 10px 0 0 10px;
-							cursor: pointer;
-						}
-					}
-				}
-			}
-		}
-
-		button.post-send-button {
+		.form-bottom-elements {
 			margin: 0.5rem 0 0 0;
+
+			select.category-select {
+				background-color: #fff;
+				border-radius: 2px;
+				padding: 0.2rem 0.5rem;
+			}
+
+			ul.checkbox-list {
+				margin: 0.2rem 0;
+			}
+
+			.check-box-title {
+				padding: 0.2rem 0;
+				input {
+					margin: 0 0.5rem 0;
+					padding: 1rem;
+				}
+			}
+
+			button.post-send-button {
+			}
 		}
 	}
 

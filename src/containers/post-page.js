@@ -31,7 +31,11 @@ class PostsPage extends Component {
 				<Categories
 					categories={this.props.categories}
 					fetchPosts={this.props.fetchPosts} />
-				{allowActions && (<NewPostForm postPost={this.props.postPost} /> )}
+				{allowActions && (
+					<NewPostForm
+						postPost={this.props.postPost}
+						categories={this.props.categories}/>
+				)}
 				<ul className="posts-list">
 					{posts.map(post =>
 						<li className="post-item" key={post.id}>

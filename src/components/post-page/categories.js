@@ -8,7 +8,7 @@ import PostsBanner from '../../../images/posts-background-banner.jpg';
 export default class Categories extends Component {
 	constructor() {
 		super();
-		this.state = { activeCategory: null};
+		this.state = { activeCategory: 'Events'};
 		this.choiceCategoryClick = this.choiceCategoryClick.bind(this);
 	}
 
@@ -51,13 +51,6 @@ export default class Categories extends Component {
 			<div className="categories-section">
 				<div style={bannerStyle}>
 					<ul className="inline-list categories-list">
-						<li className="inline-block category-item">
-							<h2
-								className={`name ${this.state.activeCategory === null && 'active'}`}
-								onClick={e => this.choiceCategoryClick(null)}>
-								All
-							</h2>
-						</li>
 						{this.renderCategories(this.props.categories)}
 					</ul>
 				</div>
