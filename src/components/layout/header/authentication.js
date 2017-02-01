@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 // Actions import
-import { postUser } from '../../actions/users'
-import { postSession, destroySession } from '../../actions/sessions';
+import { postUser } from '../../../actions/users'
+import { postSession, destroySession } from '../../../actions/sessions';
 
-import { addFlashMessage, destroyFlashMessage } from '../../actions/flash-messages';
+import { addFlashMessage, destroyFlashMessage } from '../../../actions/flash-messages';
 
 // Shows Registration form for user
-class RegistrationForm extends Component {
+class Authentication extends Component {
 	constructor() {
 		super();
 
@@ -137,4 +137,4 @@ export function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
 	postUser, addFlashMessage, destroyFlashMessage, postSession, destroySession
-})(RegistrationForm);
+})(Authentication);

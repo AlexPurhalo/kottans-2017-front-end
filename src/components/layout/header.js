@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 // Components import
-import RegistrationForm from '../header-components/registration';
+import Authentication from './header/authentication';
 
 // Shows navigation bar for user
 export default class Header extends Component {
@@ -24,7 +24,7 @@ export default class Header extends Component {
 								</ul>
 							</div>
 							<div className="col-md-10 right-side">
-								<RegistrationForm />
+								<Authentication />
 							</div>
 						</div>
 					</div>

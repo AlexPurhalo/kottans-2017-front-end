@@ -1,27 +1,16 @@
 // Node modules import
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 
 // Images import
-import CompleteMarkIcon from '../../images/complete-mark.png';
-import EditIcon from '../../images/edit-icon.png';
-import RemoveIcon from '../../images/close-icon-black.png';
+import CompleteMarkIcon from '../../../images/complete-mark.png';
+import EditIcon from '../../../images/edit-icon.png';
+import RemoveIcon from '../../../images/close-icon-black.png';
 
-// Actions import
-import { fetchUserAnswers, postUserAnswer, putUserAnswer, deleteUserAnswer } from '../actions/users';
-import { fetchQuestions } from '../actions/questions';
-
-// Shows a page that represents the user's questions and answers
-class UserQuestionsPage extends Component {
+// Shows the user questions list
+export default class UserQuestionsList extends Component {
 	constructor() {
 		super();
-
 		this.state = { onEditAnswer: false, chosenItem: null, chosenAnswer: null, answer: '' }
-	}
-
-	componentWillMount() {
-		this.props.fetchUserAnswers(this.props.params.username);
-		this.props.fetchQuestions();
 	}
 
 	questionsList(answers, questions) {
@@ -43,9 +32,7 @@ class UserQuestionsPage extends Component {
 		return resultArr;
 	}
 
-	accountOwner() {
-		if (this.props.params.username == localStorage.getItem('username')) return true;
-	}
+	accountOwner() { if (this.props.username == localStorage.getItem('username')) return true }
 
 	addQuestion(e, question) {
 		e.preventDefault();
@@ -161,16 +148,3 @@ class UserQuestionsPage extends Component {
 		);
 	}
 }
-
-// Maps the states to properties
-function mapStateToProps(state) {
-	return {
-		answers: state.users.user.answers,
-		questions: state.questions.questionsList
-	}
-}
-
-// Exports component and connects to redux's stuff
-export default connect(mapStateToProps, {
-	fetchUserAnswers, fetchQuestions, postUserAnswer, putUserAnswer, deleteUserAnswer
-})(UserQuestionsPage);
