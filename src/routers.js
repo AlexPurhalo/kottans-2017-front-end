@@ -4,7 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 
 // Components import
 import App from './components/app';
-import PostsPage from './components/posts-page';
+import PostsPage from './containers/post-page';
 import About from './components/about';
 import UserQuestionsPage from './components/user-questions-page';
 import UsersListPage from './components/users-list-page';

@@ -6,6 +6,7 @@ export const INITIAL_STATE = {
 // Action types import
 import { POST_USER_SUCCESS } from '../constants/users';
 import { POST_SESSION_SUCCESS, DESTROY_SESSION_SUCCESS, AUTO_SIGN_IN } from '../constants/sessions';
+
 import {
 	FETCH_POSTS_SUCCESS,
 	POST_POST_SUCCESS,
