@@ -19,43 +19,25 @@ export default class NewPostForm extends Component {
 			posted: false,
 			onAddPost: false
 		};
-
-		this.addCategoryToList = this.addCategoryToList.bind(this);
-		this.handleCategoryName = this.handleCategoryName.bind(this);
-
-		this.handleTitle = this.handleTitle.bind(this);
-		this.handleDescription = this.handleDescription.bind(this);
-		this.sendForm = this.sendForm.bind(this);
-
-		this.changePostedState = this.changePostedState.bind(this);
-
-		this.changeOnAddPostState = this.changeOnAddPostState.bind(this);
 	}
 
-	handleCategoryName(e) {
-		this.setState({ category: e.target.value });
-	}
 
-	addCategoryToList() {
+	handleCategoryName = (e) => { this.setState({ category: e.target.value }) };
+
+	addCategoryToList = () => {
 		let arrWithNewCategory = this.state.categories;
 		arrWithNewCategory.push(this.state.category);
 		this.setState({ categories:  arrWithNewCategory, category: '' });
-	}
+	};
 
-	handleTitle(e) {
-		this.setState({ title: e.target.value });
-	}
+	handleTitle = (e) => { this.setState({ title: e.target.value }) };
 
-	handleDescription(e) {
-		this.setState({ description: e.target.value });
-	}
+	handleDescription =(e) => { this.setState({ description: e.target.value }) };
 
-
-	sendForm(e) {
+	sendForm = (e) => {
 		e.preventDefault();
 
 		let formErrors = [];
-
 		this.state.title.length < 1 && formErrors.push('Title is required');
 		this.state.description.length < 1 && formErrors.push('Description is required');
 		this.state.categories.length < 1 && formErrors.push('Add at last one category');
@@ -64,7 +46,7 @@ export default class NewPostForm extends Component {
 			? (this.props.postPost(this.state.title, this.state.description, this.state.categories)
 			&& this.setState({ description: '', title: '', category: '', posted: true, categories: [] }))
 			: (this.setState({errors: formErrors}));
-	}
+	};
 
 	newPostForm() {
 		return (
@@ -98,9 +80,7 @@ export default class NewPostForm extends Component {
 							<ul className="inline-list categories">
 								{this.state.categories.map(category =>
 									<li className="inline-block" key={category}>
-										<div className="added-category">
-											# {category}
-										</div>
+										<div className="added-category"># {category}</div>
 									</li>
 								)}
 								<li className="inline-block category-input">
@@ -115,10 +95,7 @@ export default class NewPostForm extends Component {
 										</li>
 										<li className="inline-block category">
 											<button onClick={this.addCategoryToList} className="non-styled-btn" type="reset">
-												<img
-													src={CompleteMarkIcon}
-													alt="plus-icon"
-													className="add-category-icon"/>
+												<img src={CompleteMarkIcon} alt="plus-icon" className="add-category-icon"/>
 											</button>
 										</li>
 									</ul>
@@ -139,32 +116,25 @@ export default class NewPostForm extends Component {
 		);
 	}
 
-	changePostedState() {
-		console.log('aaa');
-		this.setState({ posted: false })
-	}
+	changePostedState = () => { this.setState({ posted: false }) };
 
 	postedMessage() {
 		return (
 			<div className="posted-message">
 				<p className="message-text">Your post was added to other, thank for your contribution</p>
-				<button
-					onClick={this.changePostedState}
-					className="non-styled-btn add-one-more-post-btn">Add one more</button>
+				<button onClick={this.changePostedState} className="non-styled-btn add-one-more-post-btn">
+					Add one more
+				</button>
 			</div>
 		);
 	}
 
-	changeOnAddPostState() {
-		this.setState({ onAddPost: !this.state.onAddPost })
-	}
+	changeOnAddPostState = () => { this.setState({ onAddPost: !this.state.onAddPost }) };
 
 	onAddPostDiv() {
 		return (
 			<div className="on-add-post-div" onClick={this.changeOnAddPostState}>
-				<p className="non-styled-btn">
-					Add a new post
-				</p>
+				<p className="non-styled-btn">Add a new post</p>
 			</div>
 		)
 	}
@@ -172,13 +142,9 @@ export default class NewPostForm extends Component {
 	render() {
 		return (
 			<div>
-				{
-					this.state.onAddPost ? (
-							this.state.posted ? this.postedMessage() : this.newPostForm()
-						) : (
-							this.onAddPostDiv()
-						)
-				}
+				{this.state.onAddPost
+					? (this.state.posted ? this.postedMessage() : this.newPostForm())
+					: (this.onAddPostDiv())}
 			</div>
 		);
 	}
