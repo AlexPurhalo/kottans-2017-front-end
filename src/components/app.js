@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 
 // Components import
-import Header from './header';
-import FlashMessage from './flash-message'
+import Header from './layout/header';
+import FlashMessage from './layout/flash-message'
 
 // Layout component
 export default class App extends Component {
@@ -15,6 +15,5 @@ export default class App extends Component {
 				{this.props.children}
 			</div>
 		);
-
 	}
 }

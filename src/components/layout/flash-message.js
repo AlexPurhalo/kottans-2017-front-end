@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Actions import
-import { addFlashMessage } from '../actions/flash-messages';
-import { destroyFlashMessage } from '../actions/flash-messages';
+import { addFlashMessage } from '../../actions/flash-messages';
+import { destroyFlashMessage } from '../../actions/flash-messages';
 
 // Images import
-import CloseIcon from '../../images/close-icon.png'
+import CloseIcon from '../../../images/close-icon.png'
 
 // Shows the flash messages
 class FlashMessage extends Component {

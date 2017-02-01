@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 // Components import
-import RegistrationForm from './header-components/registration';
+import RegistrationForm from '../header-components/registration';
 
 // Shows navigation bar for user
 export default class Header extends Component {
