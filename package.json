@@ -6,6 +6,7 @@
 	"repository": "git@github.com:AlexPurhalo/kottans-2017-front-end$.git",
 	"scripts": {
 		"dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+		"docker-start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0",
 		"postinstall": "webpack -p",
 		"start": "node server.js"
 	},
