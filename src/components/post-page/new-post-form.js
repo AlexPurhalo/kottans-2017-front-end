@@ -16,6 +16,7 @@ export default class NewPostForm extends Component {
 			posted: false,
 			onAddPost: true,
 			withParty: false,
+			withVoting: false,
 			category: ''
 		};
 	}
@@ -41,9 +42,26 @@ export default class NewPostForm extends Component {
 
 	changeWithPartyState = () => { this.setState({ withParty: !this.state.withParty }) };
 
-	selectCategory = (e) => {
-		this.setState({ category: e.target.value });
-	};
+	changeWithVotingState = () => { this.setState({ withVoting: !this.state.withVoting })};
+
+	selectCategory = (e) => { this.setState({ category: e.target.value }) };
+
+	checkBoxSection(title, action, value, inputName) {
+		return [
+			<li className="inline-block" key="1">{title}</li>,
+			<li className="inline-block" key="2">
+				<div className="checkbox">
+					<input
+						onChange={action}
+						type="checkbox"
+						value={value}
+						id={inputName} />
+					<label htmlFor={inputName}>
+					</label>
+				</div>
+			</li>
+		];
+	}
 
 	newPostForm() {
 		return (
@@ -85,23 +103,13 @@ export default class NewPostForm extends Component {
 									)}
 								</select>
 							</div>
-							<div className="col-md-2">
+							<div className="col-md-4">
 								<ul className="inline-list checkbox-list">
-									<li className="inline-block">Event</li>
-									<li className="inline-block">
-										<div className="checkbox">
-											<input
-												onChange={this.changeWithPartyState}
-												type="checkbox"
-												value={this.state.withParty}
-												id="checkbox-input" />
-											<label htmlFor="checkbox-input">
-											</label>
-										</div>
-									</li>
+									{this.checkBoxSection('Party', this.changeWithPartyState, this.state.withParty, 'party-input')}
+									{this.checkBoxSection('Voting', this.changeWithVotingState, this.state.withVoting, 'voting-input')}
 								</ul>
 							</div>
-							<div className="col-md-8 right-side">
+							<div className="col-md-6 right-side">
 								<button type="submit" className="btn post-send-button">Submit</button>
 							</div>
 						</div>
@@ -149,4 +157,3 @@ export default class NewPostForm extends Component {
 		);
 	}
 }
-///sfsdfdsf
