@@ -18,8 +18,9 @@ export default class NewPostForm extends Component {
 			onAddPost: true,
 			withParty: false,
 			withVoting: false,
-			votingVariants: ['Ruby Patterns', 'JavascriptPatterns', 'JWT', 'Social Authentication'],
-			category: ''
+			votingVariants: [],
+			category: '',
+			variant: ''
 		};
 	}
 
@@ -35,10 +36,13 @@ export default class NewPostForm extends Component {
 		this.state.title.length < 1 && formErrors.push('Title is required');
 		this.state.description.length < 1 && formErrors.push('Description is required');
 		this.state.category.length < 1 && formErrors.push('Choice any category');
+		this.state.withVoting && this.state.votingVariants.length < 1 && formErrors.push('Provide voting variants');
 
 		formErrors.length < 1
 			? (this.props.postPost(this.state.title, this.state.description, this.state.withParty, this.state.category)
-			&& this.setState({ description: '', title: '', posted: true, withParty: false, category: false }))
+			&& this.setState({
+				description: '', title: '', posted: true, withParty: false, category: false, votingVariants: []
+			}))
 			: (this.setState({errors: formErrors}));
 	};
 
@@ -65,10 +69,36 @@ export default class NewPostForm extends Component {
 		];
 	}
 
+	removeVariant = (variant) => {
+		let variantsArr = this.state.votingVariants;
+		variantsArr = variantsArr.filter(value => value != variant);
+
+		this.setState({ votingVariants: variantsArr });
+	};
+
+	addVariant = (e) => {
+		e.preventDefault();
+
+		if (this.state.variant.length > 0) {
+			let variantsArr = this.state.votingVariants;
+			variantsArr.push(this.state.variant);
+
+			this.setState({ votingVariants: variantsArr, variant: '' });
+		}
+	};
+
+	handleChangeVariant = (e) => { this.setState({ variant: e.target.value })};
+
 	votingForm() {
 		return (
-			<form className="voting-form">
-				<input type="text" className="underline-input post-inputs-group" placeholder="Variant of answer" />
+			<form className="voting-form" onSubmit={this.addVariant}>
+				<input
+					autoFocus
+					onChange={this.handleChangeVariant}
+					value={this.state.variant}
+					type="text"
+					className="underline-input post-inputs-group"
+					placeholder="Variant of answer" />
 				<button className="non-styled-btn" type="submit">
 					<img src={CompleteMarkIcon} className="completeMarkIcon" alt="complete-mark-icon"/>
 				</button>
@@ -128,21 +158,25 @@ export default class NewPostForm extends Component {
 						</div>
 					</div>
 				</form>
-				{this.votingForm()}
-				<ol className="voting-variants">
-					{this.state.votingVariants.map(variant =>
-						<li className="variant" key={variant}>
-							<ul className="inline-list">
-								<li className="inline-block">
-									<h5 className="variant-title">{variant}</h5>
+				{this.state.withVoting && (
+					<div className="voting-section">
+						{this.votingForm()}
+						<ol className="voting-variants">
+							{this.state.votingVariants.map(variant =>
+								<li className="variant" key={variant}>
+									<ul className="inline-list">
+										<li className="inline-block">
+											<h5 className="variant-title">{variant}</h5>
+										</li>
+										<li className="inline-block">
+											<img src={CloseIcon} alt="close-icon" className="remove-icon" onClick={e => this.removeVariant(variant)}/>
+										</li>
+									</ul>
 								</li>
-								<li className="inline-block">
-									<img src={CloseIcon} alt="close-icon" className="remove-icon" />
-								</li>
-							</ul>
-						</li>
-					)}
-				</ol>
+							)}
+						</ol>
+					</div>
+				)}
 				<ul className="errors-list">
 					{this.state.errors.map(error =>
 						<li key={error} className="error"><p>{error}</p></li>
