@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // Images import
 import CloseIcon from '../../../images/close-icon-black.png';
+import CompleteMarkIcon from '../../../images/complete-mark.png';
 
 // Shows form to add a new post
 export default class NewPostForm extends Component {
@@ -17,6 +18,7 @@ export default class NewPostForm extends Component {
 			onAddPost: true,
 			withParty: false,
 			withVoting: false,
+			votingVariants: ['Ruby Patterns', 'JavascriptPatterns', 'JWT', 'Social Authentication'],
 			category: ''
 		};
 	}
@@ -61,6 +63,17 @@ export default class NewPostForm extends Component {
 				</div>
 			</li>
 		];
+	}
+
+	votingForm() {
+		return (
+			<form className="voting-form">
+				<input type="text" className="underline-input post-inputs-group" placeholder="Variant of answer" />
+				<button className="non-styled-btn" type="submit">
+					<img src={CompleteMarkIcon} className="completeMarkIcon" alt="complete-mark-icon"/>
+				</button>
+			</form>
+		);
 	}
 
 	newPostForm() {
@@ -115,6 +128,21 @@ export default class NewPostForm extends Component {
 						</div>
 					</div>
 				</form>
+				{this.votingForm()}
+				<ol className="voting-variants">
+					{this.state.votingVariants.map(variant =>
+						<li className="variant" key={variant}>
+							<ul className="inline-list">
+								<li className="inline-block">
+									<h5 className="variant-title">{variant}</h5>
+								</li>
+								<li className="inline-block">
+									<img src={CloseIcon} alt="close-icon" className="remove-icon" />
+								</li>
+							</ul>
+						</li>
+					)}
+				</ol>
 				<ul className="errors-list">
 					{this.state.errors.map(error =>
 						<li key={error} className="error"><p>{error}</p></li>

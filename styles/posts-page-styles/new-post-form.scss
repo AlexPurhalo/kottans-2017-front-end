@@ -29,6 +29,7 @@
 			width: 100px;
 		}
 	}
+
 	form.post-form {
 		margin: 1rem auto;
 
@@ -61,6 +62,40 @@
 			button.post-send-button {
 			}
 		}
+	}
+
+	form.voting-form {
+		input {
+			@media (max-width: 600px) {
+				width: 100px;
+			}
+		}
+
+		button {
+			img.completeMarkIcon {
+				width: 20px;
+				height: 20px;
+			}
+		}
+	}
+
+	ol.voting-variants {
+		margin: 1rem 0 0 1rem;
+		padding: 0 0;
+
+		li.variant {
+			h5.variant-title {
+				font-size: 1rem;
+			}
+
+			img.remove-icon {
+				margin: 0 5px;
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+
 	}
 
 	ul.errors-list {
