@@ -15,7 +15,7 @@ export default class NewPostForm extends Component {
 			description: '',
 			errors: [],
 			posted: false,
-			onAddPost: true,
+			onAddPost: false,
 			withParty: false,
 			withVoting: false,
 			votingVariants: [],

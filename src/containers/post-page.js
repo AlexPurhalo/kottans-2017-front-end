@@ -15,6 +15,7 @@ import AdditionalSection from '../components/post-page/additional-section';
 import Comments from '../components/post-page/comments';
 import AddCommentForm from '../components/post-page/add-comment-form';
 import EventGroup from '../components/post-page/event-group';
+import AnswerVariants from '../components/post-page/answer-variants';
 
 // Main page, show posts list
 class PostsPage extends Component {
@@ -47,6 +48,10 @@ class PostsPage extends Component {
 								postVote={this.props.postVote}
 								allowToLike={allowActions} />
 							<MainSection description={post.description} />
+							{post.withVoting && (
+								<AnswerVariants
+									variants={post.answerVariants} />
+							)}
 							<AdditionalSection
 								categories={post.categories}
 								author={post.author}

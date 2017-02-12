@@ -48,9 +48,20 @@ export function normalizePosts(data) {
 			date: normalizeCreateDate(post.created_at),
 			comments: normalizeComments(post.comments),
 			withParty: post.with_party,
-			eventGroup: post.party
+			withVoting: post.with_voting,
+			eventGroup: post.party,
+			answerVariants: normalizeAnswerVariants(post.variants)
 		})
 	});
 
 	return toReducer;
+}
+
+
+function normalizeAnswerVariants(variants) {
+	let variantsArr = [];
+
+	variants.map(variant => variantsArr.push({ id: variant.id, name: variant.body }));
+
+	return variantsArr;
 }
