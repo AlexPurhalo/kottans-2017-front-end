@@ -24,7 +24,6 @@ export default class NewPostForm extends Component {
 		};
 	}
 
-
 	handleTitle = (e) => { this.setState({ title: e.target.value }) };
 
 	handleDescription =(e) => { this.setState({ description: e.target.value }) };
@@ -38,12 +37,28 @@ export default class NewPostForm extends Component {
 		this.state.category.length < 1 && formErrors.push('Choice any category');
 		this.state.withVoting && this.state.votingVariants.length < 1 && formErrors.push('Provide voting variants');
 
-		formErrors.length < 1
-			? (this.props.postPost(this.state.title, this.state.description, this.state.withParty, this.state.category)
-			&& this.setState({
-				description: '', title: '', posted: true, withParty: false, category: false, votingVariants: []
-			}))
-			: (this.setState({errors: formErrors}));
+		if (formErrors.length < 1) {
+			this.props.postPost(
+				this.state.title,
+				this.state.description,
+				this.state.withParty,
+				this.state.category,
+				this.state.withVoting,
+				this.state.votingVariants
+			);
+
+			this.setState({
+				description: '',
+				title: '',
+				posted: true,
+				withParty: false,
+				withVoting: false,
+				category: false,
+				votingVariants: []
+			});
+		} else {
+			this.setState({errors: formErrors})
+		}
 	};
 
 	changeWithPartyState = () => { this.setState({ withParty: !this.state.withParty }) };
