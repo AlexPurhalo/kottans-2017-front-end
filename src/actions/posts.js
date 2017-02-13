@@ -45,7 +45,9 @@ function fetchPostsSuccess(data) {
 // Creates a new post
 export function postPost(title, description, withParty, category) {
 
-	const data = { title: title, description: description, with_party: withParty, categories: [category]};
+	const data = {
+		title: title, description: description, with_party: withParty, categories: [category], with_voting: false
+	};
 	console.log(data);
 	return function(dispatch) {
 		return axios.post(`${API}/posts`, data, headers)
