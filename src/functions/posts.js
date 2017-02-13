@@ -61,7 +61,20 @@ export function normalizePosts(data) {
 function normalizeAnswerVariants(variants) {
 	let variantsArr = [];
 
-	variants.map(variant => variantsArr.push({ id: variant.id, name: variant.body }));
+	variants.map(variant => variantsArr.push({
+		id: variant.id,
+		name: variant.body,
+		answers: normalizeVotingAnswers(variant.voting_answers),
+		answersCount: variant.voting_answers.length
+	}));
 
 	return variantsArr;
+}
+
+function normalizeVotingAnswers(answers) {
+	let normalizedAnswers = [];
+
+	answers.map(answer => normalizedAnswers.push({userId: answer.user.id, userName: answer.user.username}));
+
+	return normalizedAnswers;
 }

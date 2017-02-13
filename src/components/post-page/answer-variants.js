@@ -8,12 +8,14 @@ export default class AnswerVariants extends Component {
 		if (arr.indexOf(item) === arr.indexOf(arr[arr.length-1])) return true;
 	}
 
-	render() {
-		let variantsCollection = this.props.variants;
+	pieCharData() {
+		let userAnswers = [];
 
-		let userAnswers = [{name: 'Ruby', count: 2}, {name: 'Go', count: 1}, {name: 'JS', count: 8}];
+		this.props.variants.map(variant =>
+			userAnswers.push({name: variant.name, count: variant.answersCount})
+		);
 
-		function answersCount(userAnswers) {
+		function findAnswersCount(userAnswers) {
 			let count = 0, i;
 
 			for (i = 0; i < userAnswers.length; i++) { count += userAnswers[i].count }
@@ -29,16 +31,20 @@ export default class AnswerVariants extends Component {
 			let arr = [];
 
 			answers.map(answer =>
-				arr.push({
+				answer.count > 0 && arr.push({
 					label: answer.name,
-					value: variantProcents(answer.count, answersCount(answers))
+					value: variantProcents(answer.count, findAnswersCount(answers))
 				})
 			);
 
 			return arr;
 		}
 
-		let pieData = variantsArr(userAnswers);
+		return variantsArr(userAnswers);
+	}
+
+	render() {
+		let variantsCollection = this.props.variants;
 
 		return (
 			<div className="answer-variants-section">
@@ -62,7 +68,7 @@ export default class AnswerVariants extends Component {
 					</div>
 					<div className="col-md-6 right-side">
 						<PieChart
-							data={pieData}
+							data={this.pieCharData()}
 							width={250}
 							height={200}
 							radius={50}

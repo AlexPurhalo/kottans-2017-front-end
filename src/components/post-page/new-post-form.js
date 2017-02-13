@@ -69,8 +69,8 @@ export default class NewPostForm extends Component {
 
 	checkBoxSection(title, action, value, inputName) {
 		return [
-			<li className="inline-block" key="1">{title}</li>,
-			<li className="inline-block" key="2">
+			<li className="inline-block" key={1}>{title}</li>,
+			<li className="inline-block" key={2}>
 				<div className="checkbox">
 					<input
 						onChange={action}
