@@ -7,18 +7,23 @@ export default class AnswerVariants extends Component {
 	constructor() {
 		super();
 
+		this.state = {
+			variantId: null,
+			openedVoting: true
+		};
+
 		this.userId = localStorage.getItem('userId')
 	}
 
-	ifLastItem(arr, item) {
-		if (arr.indexOf(item) === arr.indexOf(arr[arr.length-1])) return true;
-	}
-
-	pieCharData() {
+	pieCharData(variantsCollection) {
 		let userAnswers = [];
 
-		this.props.variants.map(variant =>
-			userAnswers.push({name: variant.name, count: variant.answersCount})
+		variantsCollection.map(variant =>
+			userAnswers.push({
+				positionNum: variantsCollection.indexOf(variant) + 1,
+				name: variant.name,
+				count: variant.answersCount
+			})
 		);
 
 		function findAnswersCount(userAnswers) {
@@ -35,10 +40,9 @@ export default class AnswerVariants extends Component {
 
 		function variantsArr(answers) {
 			let arr = [];
-
 			answers.map(answer =>
 				answer.count > 0 && arr.push({
-					label: answer.name,
+					label: answer.positionNum,
 					value: variantProcents(answer.count, findAnswersCount(answers))
 				})
 			);
@@ -53,59 +57,81 @@ export default class AnswerVariants extends Component {
 		let result = false;
 
 		answersCollection.map(answer => {
-			console.log(answer);
 			answer.userId == userId && (result = true)
 		});
 
 		return result
 	}
 
+	sendForm = (e) => {
+		e.preventDefault();
+		this.setState({variant: null, openedVoting: false})
+
+	};
+
+	selectVariant = (e) => {
+		this.setState({ variantId: e.target.value })
+	};
+
 	variantsInputs(variantsCollection) {
 		return (
-			<div className="col-md-6">
-				{variantsCollection.map(variant =>
-					<div className="variant" key={variant.id}>
-						<div className="row">
-							<div className="col-md-9">
-								<input type="radio" name="variant" value={variant.id}/> {variant.name}
-							</div>
-							<div className="col-md-3 right-side">
-								{this.ifLastItem(variantsCollection, variant) && (
-									<button className="btn btn-default">Vote</button>
-								)}
-							</div>
-						</div>
-					</div>
-				)}
-			</div>
+			<form onSubmit={this.sendForm}>
+				<ol>
+					{variantsCollection.map(variant =>
+						<li className="variant" key={variant.id}>
+							<input
+								onChange={this.selectVariant}
+								type="radio"
+								name='firVar'
+								value={variant.id}/>
+							{variant.name}
+						</li>
+					)}
+				</ol>
+				<button type="submit" className="btn btn-default">Submit</button>
+			</form>
 		);
 	}
 
 	graphic() {
 		return (
-			<div className="col-md-6 right-side">
-				<PieChart
-					data={this.pieCharData()}
-					width={250}
-					height={200}
-					radius={50}
-					innerRadius={15}
-					sectorBorderColor="white"
-				/>
-			</div>
+			<PieChart
+				data={this.pieCharData(this.props.variants)}
+				width={280}
+				height={250}
+				radius={80}
+				innerRadius={30}
+				sectorBorderColor="white"
+			/>
 		);
 	}
 
 	render() {
+		let answersCollection = this.props.votingAnswers;
+
 		return (
 			<div className="answer-variants-section">
 				<hr/>
 				<div className="row">
-					{this.props.authenticatedUser && !this.votedByUser(this.props.votingAnswers, this.userId)
-						? this.variantsInputs(this.props.variants) : (<h1>Voted!</h1>)
-					}
 					{
-						this.graphic()
+						this.state.openedVoting
+						&& this.props.authenticatedUser
+						&& !this.votedByUser(answersCollection, this.userId)
+							? (
+								<div className="row">
+									<div className="col-md-6">
+										{this.variantsInputs(this.props.variants)}
+									</div>
+									<div className="col-md-6 right-side">
+										{answersCollection.length > 0 && this.graphic()}
+									</div>
+								</div>
+							)
+							: (
+								<div className="visualisation-for-voted-user">
+									{answersCollection.length > 0 && this.graphic()}
+								</div>
+							)
 					}
 				</div>
 				<hr/>
@@ -113,3 +139,4 @@ export default class AnswerVariants extends Component {
 		);
 	}
 }
+
