@@ -50,7 +50,9 @@ class PostsPage extends Component {
 							<MainSection description={post.description} />
 							{post.withVoting && (
 								<AnswerVariants
-									variants={post.answerVariants} />
+									authenticatedUser={this.props.authenticatedUser}
+									variants={post.answerVariants}
+									votingAnswers={post.votingAnswers}/>
 							)}
 							<AdditionalSection
 								categories={post.categories}
@@ -92,7 +94,8 @@ function mapStateToProps(state) {
 	return {
 		posts: state.posts.postsList,
 		categories: state.categories.categoriesList,
-		allowActions: state.posts.allowActions
+		allowActions: state.posts.allowActions,
+		authenticatedUser: state.session.authenticated
 	}
 }
 

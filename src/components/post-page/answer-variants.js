@@ -4,6 +4,12 @@ import { PieChart } from 'react-d3';
 
 // Shows variants for voting
 export default class AnswerVariants extends Component {
+	constructor() {
+		super();
+
+		this.userId = localStorage.getItem('userId')
+	}
+
 	ifLastItem(arr, item) {
 		if (arr.indexOf(item) === arr.indexOf(arr[arr.length-1])) return true;
 	}
@@ -43,39 +49,64 @@ export default class AnswerVariants extends Component {
 		return variantsArr(userAnswers);
 	}
 
-	render() {
-		let variantsCollection = this.props.variants;
+	votedByUser(answersCollection, userId) {
+		let result = false;
 
+		answersCollection.map(answer => {
+			console.log(answer);
+			answer.userId == userId && (result = true)
+		});
+
+		return result
+	}
+
+	variantsInputs(variantsCollection) {
+		return (
+			<div className="col-md-6">
+				{variantsCollection.map(variant =>
+					<div className="variant" key={variant.id}>
+						<div className="row">
+							<div className="col-md-9">
+								<input type="radio" name="variant" value={variant.id}/> {variant.name}
+							</div>
+							<div className="col-md-3 right-side">
+								{this.ifLastItem(variantsCollection, variant) && (
+									<button className="btn btn-default">Vote</button>
+								)}
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		);
+	}
+
+	graphic() {
+		return (
+			<div className="col-md-6 right-side">
+				<PieChart
+					data={this.pieCharData()}
+					width={250}
+					height={200}
+					radius={50}
+					innerRadius={15}
+					sectorBorderColor="white"
+				/>
+			</div>
+		);
+	}
+
+	render() {
 		return (
 			<div className="answer-variants-section">
 				<hr/>
 				<div className="row">
-					<div className="col-md-6">
-						{variantsCollection.map(variant =>
-							<div className="variant" key={variant.id}>
-								<div className="row">
-									<div className="col-md-9">
-										<input type="radio" name="variant" value={variant.id}/> {variant.name}
-									</div>
-									<div className="col-md-3 right-side">
-										{this.ifLastItem(variantsCollection, variant) && (
-											<button className="btn btn-default">Vote</button>
-										)}
-									</div>
-								</div>
-							</div>
-						)}
-					</div>
-					<div className="col-md-6 right-side">
-						<PieChart
-							data={this.pieCharData()}
-							width={250}
-							height={200}
-							radius={50}
-							innerRadius={15}
-							sectorBorderColor="white"
-						/>
-					</div>
+					{this.props.authenticatedUser && !this.votedByUser(this.props.votingAnswers, this.userId)
+						? this.variantsInputs(this.props.variants) : (<h1>Voted!</h1>)
+					}
+					{
+						this.graphic()
+					}
 				</div>
 				<hr/>
 			</div>

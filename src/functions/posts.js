@@ -50,7 +50,8 @@ export function normalizePosts(data) {
 			withParty: post.with_party,
 			withVoting: post.with_voting,
 			eventGroup: post.party,
-			answerVariants: normalizeAnswerVariants(post.variants)
+			answerVariants: normalizeAnswerVariants(post.variants),
+			votingAnswers: normalizeVotingAnswers(post.voting_answers)
 		})
 	});
 
@@ -74,7 +75,9 @@ function normalizeAnswerVariants(variants) {
 function normalizeVotingAnswers(answers) {
 	let normalizedAnswers = [];
 
-	answers.map(answer => normalizedAnswers.push({userId: answer.user.id, userName: answer.user.username}));
+	answers.map(answer => normalizedAnswers.push({
+		answerId: answer.id, userId: answer.user.id, userName: answer.user.username
+	}));
 
 	return normalizedAnswers;
 }
