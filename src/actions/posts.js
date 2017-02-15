@@ -4,14 +4,15 @@ import axios from 'axios';
 // Functions import
 import { adapteLink } from '../functions/categories';
 
-// Actions import
+// Action types import
 import {
 	FETCH_POSTS_SUCCESS,
 	POST_POST_SUCCESS,
 	POST_POST_FAILURE,
 	POST_COMMENT_SUCCESS,
 	POST_VOTE_SUCCESS,
-	ADD_USER_TO_PARTY_OR_REMOVE
+	ADD_USER_TO_PARTY_OR_REMOVE,
+	ADD_USER_ANSWER_SUCCESS
 } from '../constants/posts';
 
 // Import of API url
@@ -117,4 +118,17 @@ function addUserToPartyOrRemoveSuccess(data) {
 		payload: normalizePosts(data)
 	}
 }
-//
+
+// Adds user's answer for the post's voting
+export function addUserAnswer(postId, variantId) {
+	return function(dispatch) {
+		return axios.post(`${API}/posts/${postId}/variants/${variantId}/voting_answers`, {}, headers)
+			.then(res => dispatch(addUserAnswerSuccess(res.data)))
+	}
+}
+function addUserAnswerSuccess(data) {
+	return {
+		type: ADD_USER_ANSWER_SUCCESS,
+		payload: normalizePosts(data)
+	}
+}

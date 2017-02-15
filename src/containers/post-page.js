@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Actions import
-import { fetchPosts, postPost, postComment, postVote, addUserToPartyOrRemove } from '../actions/posts';
+import { fetchPosts, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer } from '../actions/posts';
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -52,7 +52,9 @@ class PostsPage extends Component {
 								<AnswerVariants
 									authenticatedUser={this.props.authenticatedUser}
 									variants={post.answerVariants}
-									votingAnswers={post.votingAnswers}/>
+									votingAnswers={post.votingAnswers}
+									addUserAnswer={this.props.addUserAnswer}
+									postId={post.id}/>
 							)}
 							<AdditionalSection
 								categories={post.categories}
@@ -79,6 +81,7 @@ class PostsPage extends Component {
 	}
 
 	render() {
+		{this.props.posts && console.log(this.props.posts)}
 		return (
 			<div className="posts-page">
 				{this.props.posts && this.props.categories
@@ -101,5 +104,5 @@ function mapStateToProps(state) {
 
 // Exports component and provides connection with redux stuff
 export default connect(mapStateToProps, {
-	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove
+	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer
 })(PostsPage);

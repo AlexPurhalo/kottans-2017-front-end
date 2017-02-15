@@ -65,6 +65,7 @@ export default class AnswerVariants extends Component {
 
 	sendForm = (e) => {
 		e.preventDefault();
+		this.props.addUserAnswer(this.props.postId, this.state.variantId);
 		this.setState({variant: null, openedVoting: false})
 
 	};
@@ -128,8 +129,20 @@ export default class AnswerVariants extends Component {
 								</div>
 							)
 							: (
-								<div className="visualisation-for-voted-user">
-									{answersCollection.length > 0 && this.graphic()}
+								<div className="row">
+									<div className="col-md-6">
+										<ol>
+											{this.props.variants.map(variant =>
+												<li className="variant" key={variant.id}>{variant.name}</li>
+											)}
+										</ol>
+									</div>
+									{answersCollection.length > 0 ? (
+											<div className="col-md-6 right-side">
+												Votes: {answersCollection.length}
+												{this.graphic()}
+											</div>
+										) : 'Still no votes'}
 								</div>
 							)
 					}
@@ -140,3 +153,4 @@ export default class AnswerVariants extends Component {
 	}
 }
 
+// sdfsdf
