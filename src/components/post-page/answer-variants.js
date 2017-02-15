@@ -67,7 +67,6 @@ export default class AnswerVariants extends Component {
 		e.preventDefault();
 		this.props.addUserAnswer(this.props.postId, this.state.variantId);
 		this.setState({variant: null, openedVoting: false})
-
 	};
 
 	selectVariant = (e) => {
@@ -99,7 +98,7 @@ export default class AnswerVariants extends Component {
 			<PieChart
 				data={this.pieCharData(this.props.variants)}
 				width={280}
-				height={250}
+				height={280}
 				radius={80}
 				innerRadius={30}
 				sectorBorderColor="white"
@@ -116,7 +115,7 @@ export default class AnswerVariants extends Component {
 				<div className="row">
 					{
 						this.state.openedVoting
-						&& this.props.authenticatedUser
+						&& this.props.authenticated
 						&& !this.votedByUser(answersCollection, this.userId)
 							? (
 								<div className="row">

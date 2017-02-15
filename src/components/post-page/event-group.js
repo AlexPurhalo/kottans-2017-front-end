@@ -49,7 +49,7 @@ export default class EventGroup extends Component {
 				<ul className="inline-list users-list">
 					{this.renderUsersList(users)}
 				</ul>
-				{this.props.allowParticipation && (
+				{this.props.authenticated && (
 					<div className="choice-section right-side">
 						<button className="choice-btn non-styled-btn">
 							<ul className="inline-list" onClick={this.participationClick}>

@@ -25,14 +25,14 @@ class PostsPage extends Component {
 	}
 
 	renderComponents(posts) {
-		let allowActions = this.props.allowActions;
+		let authenticated = this.props.authenticatedUser;
 
 		return (
 			<div>
 				<Categories
 					categories={this.props.categories}
 					fetchPosts={this.props.fetchPosts} />
-				{allowActions && (
+				{authenticated && (
 					<NewPostForm
 						postPost={this.props.postPost}
 						categories={this.props.categories}/>
@@ -46,11 +46,11 @@ class PostsPage extends Component {
 								likes={post.votes.likes}
 								dislikes={post.votes.dislikes}
 								postVote={this.props.postVote}
-								allowToLike={allowActions} />
+								authenticated={authenticated} />
 							<MainSection description={post.description} />
 							{post.withVoting && (
 								<AnswerVariants
-									authenticatedUser={this.props.authenticatedUser}
+									authenticated={authenticated}
 									variants={post.answerVariants}
 									votingAnswers={post.votingAnswers}
 									addUserAnswer={this.props.addUserAnswer}
@@ -65,10 +65,10 @@ class PostsPage extends Component {
 									eventGroup={post.eventGroup ? post.eventGroup : { users: [] }}
 									addUserToPartyOrRemove={this.props.addUserToPartyOrRemove}
 									postId={post.id}
-									allowParticipation={allowActions} />
+									authenticated={authenticated} />
 							)}
 							{post.comments.length > 0 && (<Comments comments={post.comments} />)}
-							{allowActions && (
+							{authenticated && (
 								<AddCommentForm
 									postId={post.id}
 									postComment={this.props.postComment} />
@@ -97,7 +97,6 @@ function mapStateToProps(state) {
 	return {
 		posts: state.posts.postsList,
 		categories: state.categories.categoriesList,
-		allowActions: state.posts.allowActions,
 		authenticatedUser: state.session.authenticated
 	}
 }

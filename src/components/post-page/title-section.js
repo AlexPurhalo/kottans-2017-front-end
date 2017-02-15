@@ -28,7 +28,7 @@ export default class TitleSection extends Component {
 						<div className="votes right-side">
 							<ul className="inline-list">
 								<li className="inline-block like-post">
-									{this.props.allowToLike
+									{this.props.authenticated
 										? (<span className="plus" onClick={this.likePost}>+{this.props.likes}</span>)
 										: (<span className="plus">{this.props.likes}</span>)
 									}
@@ -38,7 +38,7 @@ export default class TitleSection extends Component {
 									</span>
 								</li>
 								<li className="inline-block dislike-post">
-									{this.props.allowToLike
+									{this.props.authenticated
 										? (<span className="minus" onClick={this.dislikePost}>-{this.props.dislikes}</span>)
 										: (<span className="minus">{this.props.dislikes}</span>)
 									}
