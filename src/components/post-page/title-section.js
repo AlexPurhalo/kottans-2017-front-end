@@ -31,7 +31,9 @@ export default class TitleSection extends Component {
 
 	updateTitle = (e) => {
 		e.preventDefault();
-		console.log(this.state.title);
+
+		this.props.updatePostData(this.props.postId, { title: this.state.title });
+
 		this.setState({ onEditTitle: false, title: '' })
 	};
 

@@ -12,14 +12,15 @@ import {
 	POST_COMMENT_SUCCESS,
 	POST_VOTE_SUCCESS,
 	ADD_USER_TO_PARTY_OR_REMOVE,
-	ADD_USER_ANSWER_SUCCESS
+	ADD_USER_ANSWER_SUCCESS,
+	UPDATE_POST_SUCCESS
 } from '../constants/posts';
 
 // Import of API url
 import { API } from '../constants/index';
 
 // Functions import
-import { normalizePosts } from '../functions/posts';
+import { normalizePosts, normalizePost } from '../functions/posts';
 
 // For headers
 const headers = {
@@ -130,5 +131,25 @@ function addUserAnswerSuccess(data) {
 	return {
 		type: ADD_USER_ANSWER_SUCCESS,
 		payload: normalizePosts(data)
+	}
+}
+
+// Update post's data
+export function updatePostData(postId, attributesObject) {
+	let attributes = Object.keys(attributesObject), data;
+	attributes.map(attribute =>
+		attribute == 'title' && (data = { title: attributesObject['title']})
+	);
+
+	return function(dispatch) {
+		return axios.put(`${API}/posts/${postId}`, data, headers)
+			.then(res => dispatch(updatePostSuccess(res.data)))
+			.catch(req => console.log(req.response.data))
+	}
+}
+function updatePostSuccess(data) {
+	return {
+		type: UPDATE_POST_SUCCESS,
+		payload: normalizePost(data)
 	}
 }

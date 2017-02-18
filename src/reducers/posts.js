@@ -10,7 +10,8 @@ import {
 	POST_COMMENT_SUCCESS,
 	POST_VOTE_SUCCESS,
 	ADD_USER_TO_PARTY_OR_REMOVE,
-	ADD_USER_ANSWER_SUCCESS
+	ADD_USER_ANSWER_SUCCESS,
+	UPDATE_POST_SUCCESS
 } from '../constants/posts';
 
 // States returning after actions reducing
@@ -28,6 +29,14 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, postsList: action.payload };
 		case ADD_USER_ANSWER_SUCCESS:
 			return { ...state, postsList: action.payload };
+		case UPDATE_POST_SUCCESS:
+			let tempArr = [];
+
+			state.postsList.map(post => {
+				post.id == action.payload.id ? tempArr.push(action.payload) : tempArr.push(post);
+			});
+
+			return { ...state, postsList: tempArr};
 		default:
 			return state;
 	}

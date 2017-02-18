@@ -3,7 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 // Actions import
-import { fetchPosts, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer } from '../actions/posts';
+import {
+	fetchPosts,
+	postPost,
+	postComment,
+	postVote,
+	addUserToPartyOrRemove,
+	addUserAnswer,
+	updatePostData
+} from '../actions/posts';
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -47,7 +55,8 @@ class PostsPage extends Component {
 								likes={post.votes.likes}
 								dislikes={post.votes.dislikes}
 								postVote={this.props.postVote}
-								authenticated={authenticated}/>
+								authenticated={authenticated}
+								updatePostData={this.props.updatePostData}/>
 							<MainSection description={post.description} />
 							{post.withVoting && (
 								<AnswerVariants
@@ -103,5 +112,5 @@ function mapStateToProps(state) {
 
 // Exports component and provides connection with redux stuff
 export default connect(mapStateToProps, {
-	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer
+	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer, updatePostData
 })(PostsPage);
