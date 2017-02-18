@@ -10,8 +10,39 @@ ul.posts-list {
 		padding: 2rem 4rem;
 
 		.title-section {
-			h1.title {
-				font-size: 1.6rem;
+			h1.title { font-size: 1.6rem }
+
+
+			img.edit-title-icon { cursor: pointer }
+
+			.edit-title-icon-before {
+				margin: 0 0 6.5px 10px;
+				width: 28px;
+				height: 28px;
+			}
+
+			.edit-title-icon-after {
+				width: 30px;
+				height: 30px;
+			}
+
+			form.edit-title-form {
+				input.edit-title-input {
+					width: 360px;
+					font-size: 1.3rem;
+					text-align: left;
+					@media (max-width: 640px) { width: 300px }
+					@media (max-width: 500px) { width: 250px }
+					@media (max-width: 430px) { width: 200px }
+				}
+
+				button {
+					img.complete-mark-icon {
+						cursor: pointer;
+						width: 28px;
+						height: 28px;
+					}
+				}
 			}
 
 			.votes {
@@ -20,39 +51,27 @@ ul.posts-list {
 				li.like-post {
 					cursor: pointer;
 
-					span.plus {
-						color:  #45b545;;
-					}
+					span.plus { color:  #45b545 }
 
-					span.plus-number {
-						color:  #45b545;;
-					}
+					span.plus-number { color:  #45b545 }
 				}
 
 				li.dislike-post {
 					cursor: pointer;
 
-					span.minus {
-						color: rgba(220, 103, 103, 0.88);
-					}
+					span.minus { color: rgba(220, 103, 103, 0.88) }
 
-					span.minus-number {
-						color: rgba(220, 103, 103, 0.88);
-					}
+					span.minus-number { color: rgba(220, 103, 103, 0.88) }
 				}
 
-				span.separator {
-					margin: 0 0.8rem;
-				}
+				span.separator { margin: 0 0.8rem }
 			}
 
 			margin: 0  0 0.3rem 0;
 		}
 
 		.main-section {
-			p.description {
-				font-size: 1.2rem;
-			}
+			p.description { font-size: 1.2rem }
 		}
 
 		.additional-section {
@@ -63,6 +82,7 @@ ul.posts-list {
 					font-size: 1.25rem;
 					font-weight: 500;
 					color: #686767;
+
 					&:hover { color: #2b2d2f }
 				}
 
@@ -70,13 +90,9 @@ ul.posts-list {
 					margin: 0 0.6rem 0 0;
 				}
 
-				h2.category.center {
-					margin: 0 0.6rem;
-				}
+				h2.category.center { margin: 0 0.6rem }
 
-				h2.category.last {
-					margin: 0 0 0 0.6rem;
-				}
+				h2.category.last { margin: 0 0 0 0.6rem }
 			}
 		}
 

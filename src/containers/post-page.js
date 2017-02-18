@@ -43,10 +43,11 @@ class PostsPage extends Component {
 							<TitleSection
 								postId={post.id}
 								title={post.title}
+								authorName={post.author}
 								likes={post.votes.likes}
 								dislikes={post.votes.dislikes}
 								postVote={this.props.postVote}
-								authenticated={authenticated} />
+								authenticated={authenticated}/>
 							<MainSection description={post.description} />
 							{post.withVoting && (
 								<AnswerVariants
@@ -81,7 +82,6 @@ class PostsPage extends Component {
 	}
 
 	render() {
-		{this.props.posts && console.log(this.props.posts)}
 		return (
 			<div className="posts-page">
 				{this.props.posts && this.props.categories

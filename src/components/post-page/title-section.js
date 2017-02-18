@@ -1,28 +1,78 @@
 // Node modules import
 import React, { Component } from 'react';
 
+// Images Import
+import EditIcon from '../../../images/edit-icon.png';
+import CompleteMarkIcon from '../../../images/complete-mark.png'
+
 // Shows title section for the posts list
 export default class TitleSection extends Component {
 	constructor() {
 		super();
 
-		this.likePost = this.likePost.bind(this);
-		this.dislikePost = this.dislikePost.bind(this);
+		this.state = { onEditTitle: false, onEditDescription: false, title: '' }
 	}
 
-	likePost() {
-		this.props.postVote(this.props.postId, true)
+	likePost = () => { this.props.postVote(this.props.postId, true) };
+
+	dislikePost = () => { this.props.postVote(this.props.postId, false) };
+
+	postOwner() {
+		return this.props.authorName == localStorage.getItem('username');
 	}
 
-	dislikePost() {
-		this.props.postVote(this.props.postId, false)
-	}
+	changeEditTitleState = () => {
+		this.setState({ onEditTitle: !this.state.onEditTitle })
+	};
+
+	changeTitle = (e) => {
+		this.setState({ title: e.target.value })
+	};
+
+	updateTitle = (e) => {
+		e.preventDefault();
+		console.log(this.state.title);
+		this.setState({ onEditTitle: false, title: '' })
+	};
+
 	render() {
 		return (
 			<div className="title-section">
 				<div className="row">
 					<div className="col-md-8">
-						<h1 className="title">{this.props.title}</h1>
+						<ul className="inline-list">
+							<li className="inline-block">
+								{!this.state.onEditTitle ? (
+										<h1 className="title">{this.props.title}</h1>
+									) : (
+										<form className="edit-title-form" onSubmit={this.updateTitle}>
+											<input
+												autoFocus
+												type="text"
+												className="underline-input grey-background edit-title-input"
+												placeholder={this.props.title}
+												value={this.state.title}
+												onChange={this.changeTitle}/>
+											<button type="submit" className="non-styled-btn">
+												<img src={CompleteMarkIcon} alt="complete-mark" className="complete-mark-icon"/>
+											</button>
+										</form>
+									)
+								}
+
+							</li>
+							{this.postOwner() && (
+								<li className="inline-block">
+									<img
+										src={EditIcon}
+										alt="edit-icon"
+										className={
+											`edit-title-icon ${this.state.onEditTitle ? 'edit-title-icon-after' : 'edit-title-icon-before'}`
+										}
+										onClick={this.changeEditTitleState}/>
+								</li>
+							)}
+						</ul>
 					</div>
 					<div className="col-md-4">
 						<div className="votes right-side">
