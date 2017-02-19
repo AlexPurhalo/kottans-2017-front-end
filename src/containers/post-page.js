@@ -112,5 +112,12 @@ function mapStateToProps(state) {
 
 // Exports component and provides connection with redux stuff
 export default connect(mapStateToProps, {
-	fetchPosts, fetchCategories, postPost, postComment, postVote, addUserToPartyOrRemove, addUserAnswer, updatePostData
+	fetchPosts,
+	fetchCategories,
+	postPost,
+	postComment,
+	postVote,
+	addUserToPartyOrRemove,
+	addUserAnswer,
+	updatePostData
 })(PostsPage);

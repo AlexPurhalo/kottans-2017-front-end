@@ -10,7 +10,7 @@ export default class TitleSection extends Component {
 	constructor() {
 		super();
 
-		this.state = { onEditTitle: false, onEditDescription: false, title: '' }
+		this.state = { onEditTitle: false, title: '' };
 	}
 
 	likePost = () => { this.props.postVote(this.props.postId, true) };
@@ -25,16 +25,10 @@ export default class TitleSection extends Component {
 		this.setState({ onEditTitle: !this.state.onEditTitle })
 	};
 
-	changeTitle = (e) => {
-		this.setState({ title: e.target.value })
-	};
-
-	updateTitle = (e) => {
+	sendForm = (e) => {
 		e.preventDefault();
-
-		this.props.updatePostData(this.props.postId, { title: this.state.title });
-
-		this.setState({ onEditTitle: false, title: '' })
+		this.state.title.length > 0 && this.props.updatePostData(this.props.postId, { title: this.state.title });
+		this.setState({ onEditTitle: false, title: '' });
 	};
 
 	render() {
@@ -47,17 +41,19 @@ export default class TitleSection extends Component {
 								{!this.state.onEditTitle ? (
 										<h1 className="title">{this.props.title}</h1>
 									) : (
-										<form className="edit-title-form" onSubmit={this.updateTitle}>
+										<form className="edit-title-form" onSubmit={this.sendForm}>
 											<input
 												autoFocus
 												type="text"
 												className="underline-input grey-background edit-title-input"
 												placeholder={this.props.title}
-												value={this.state.title}
-												onChange={this.changeTitle}/>
-											<button type="submit" className="non-styled-btn">
-												<img src={CompleteMarkIcon} alt="complete-mark" className="complete-mark-icon"/>
-											</button>
+												defaultValue={this.props.title}
+												onChange={e => this.setState({ title: e.target.value })}/>
+											{this.state.title.length > 1 && (
+												<button type="submit" className="non-styled-btn">
+													<img src={CompleteMarkIcon} alt="complete-mark" className="complete-mark-icon"/>
+												</button>
+											)}
 										</form>
 									)
 								}
