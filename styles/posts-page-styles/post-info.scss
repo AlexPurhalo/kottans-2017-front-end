@@ -72,6 +72,26 @@ ul.posts-list {
 
 		.main-section {
 			p.description { font-size: 1.2rem }
+			img.edit-icon {
+				cursor: pointer;
+				width: 20px;
+				height: 20px;
+				margin: 0 0 4px 3px;
+			}
+
+
+			form.edit-description-form {
+				button { margin: 0.35rem 0 0 0 }
+				button.cancel-btn {
+					margin-left: 0.35rem;
+				}
+			}
+
+			ul.errors-list {
+				list-style: none;
+
+				li.error { color: rgba(255, 0, 0, 0.62) }
+			}
 		}
 
 		.additional-section {
