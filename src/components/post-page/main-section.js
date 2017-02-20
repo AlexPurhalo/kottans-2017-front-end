@@ -19,14 +19,19 @@ export default class MainSection extends Component {
 		let formErrors = [];
 
 		e.preventDefault();
-		console.log(this.state.description.length) ;
+
 		if (this.state.description.length > 0) {
+			this.props.updatePostData(this.props.postId, {description: this.state.description});
 			this.setState({ description: '', onEditDescription: false, errors: [] })
 		} else {
 			formErrors.push('Provide changes for description');
 			this.setState({ errors: formErrors })
 		}
 	};
+
+	postOwner() {
+		return this.props.authorName == localStorage.getItem('username');
+	}
 
 	renderEditForm() {
 		return (
@@ -57,9 +62,11 @@ export default class MainSection extends Component {
 					<p className="description">{this.props.description}</p>
 				</li>
 				<li className="inline-block">
-					<button className="non-styled-btn" type="reset" onClick={this.changeOnEditState}>
-						<img src={EditIcon} alt="edit-icon" className="edit-icon"/>
-					</button>
+					{this.props.authenticated && this.postOwner() && (
+						<button className="non-styled-btn" type="reset" onClick={this.changeOnEditState}>
+							<img src={EditIcon} alt="edit-icon" className="edit-icon"/>
+						</button>
+					)}
 				</li>
 			</ul>
 		);

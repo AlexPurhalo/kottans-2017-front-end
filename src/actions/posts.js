@@ -136,11 +136,16 @@ function addUserAnswerSuccess(data) {
 
 // Update post's data
 export function updatePostData(postId, attributesObject) {
+	console.log(attributesObject);
 	let attributes = Object.keys(attributesObject), data;
-	attributes.map(attribute =>
-		attribute == 'title' && (data = { title: attributesObject['title']})
+
+	attributes.map(attribute => {
+			attribute == 'title' && (data = { title: attributesObject['title']});
+			attribute == 'description' && (data = { description: attributesObject['description']});
+		}
 	);
 
+	console.log(data); //sdfsdf
 	return function(dispatch) {
 		return axios.put(`${API}/posts/${postId}`, data, headers)
 			.then(res => dispatch(updatePostSuccess(res.data)))

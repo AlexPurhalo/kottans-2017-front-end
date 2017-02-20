@@ -57,7 +57,12 @@ class PostsPage extends Component {
 								postVote={this.props.postVote}
 								authenticated={authenticated}
 								updatePostData={this.props.updatePostData}/>
-							<MainSection description={post.description} />
+							<MainSection
+								postId={post.id}
+								authorName={post.author}
+								authenticated={authenticated}
+								updatePostData={this.props.updatePostData}
+								description={post.description} />
 							{post.withVoting && (
 								<AnswerVariants
 									authenticated={authenticated}
