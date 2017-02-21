@@ -22,6 +22,18 @@
 		}
 	}
 
+	.sign-in-with-github {
+		margin-left: 15px;
+		text-decorationa: none;
+		color: inherit;
+		.github-icon {
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+			margin-left: 5px;
+		}
+	}
+
 
 	form.registration-form {
 		margin: 0.3rem 0;

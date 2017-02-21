@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+// Images import
+import GithubIcon from '../../../../images/github-icon.png';
+
 // Actions import
 import { postUser } from '../../../actions/users'
-import { postSession, destroySession } from '../../../actions/sessions';
-
+import { postSession, destroySession, authWithGithub } from '../../../actions/sessions';
 import { addFlashMessage, destroyFlashMessage } from '../../../actions/flash-messages';
 
 // Shows Registration form for user
@@ -15,6 +17,12 @@ class Authentication extends Component {
 		super();
 
 		this.state = { signUp: true, signIn: false, username: '', password: '', errors: [] };
+	}
+
+	componentWillMount() {
+		let sessionCode = this.props.githubSessionCode;
+
+		sessionCode && this.props.authWithGithub(sessionCode);
 	}
 
 	// Sends form to back-end
@@ -34,48 +42,59 @@ class Authentication extends Component {
 
 	renderAuthForm() {
 		return (
-			<form className="registration-form" onSubmit={this.sendForm}>
+			<div>
 				<ul className="inline-list">
 					<li className="inline-block">
-						<div
-							className={`registration-title sign-up-title ${this.state.signUp ? 'active-type' : 'disabled-type'}`}
-							onClick={e => this.setState({ signUp: true, signIn: false })}>
-							SignUp
-						</div>
+						<form className="registration-form" onSubmit={this.sendForm}>
+							<ul className="inline-list">
+								<li className="inline-block">
+									<div
+										className={`registration-title sign-up-title ${this.state.signUp ? 'active-type' : 'disabled-type'}`}
+										onClick={e => this.setState({ signUp: true, signIn: false })}>
+										SignUp
+									</div>
+								</li>
+								<li className="inline-block">
+									<div className="registration-title separator">|</div>
+								</li>
+								<li className="inline-block">
+									<div
+										className={`registration-title sign-in-title ${this.state.signIn ? 'active-type' : 'disabled-type'}`}
+										onClick={e => this.setState({ signIn: true, signUp: false })}>
+										Sign In
+									</div>
+								</li>
+								<li className="inline-block">
+									<input
+										onChange={e => this.setState({ username: e.target.value })}
+										type="text"
+										className={`form-field username ${this.state.signIn && 'active-sign-in'}`}
+										placeholder="Username"/>
+								</li>
+								<li className="inline-block">
+									<input
+										onChange={e => this.setState({ password: e.target.value })}
+										type="password"
+										className={`form-field password ${this.state.signIn && 'active-sign-in'}`}
+										placeholder="Password"/>
+								</li>
+								<li className="inline-block">
+									<button
+										type="submit"
+										className={`submit-btn ${this.state.signIn && 'active-sign-in'}`}>
+										Submit
+									</button>
+								</li>
+							</ul>
+						</form>
 					</li>
 					<li className="inline-block">
-						<div className="registration-title separator">|</div>
-					</li>
-					<li className="inline-block">
-						<div
-							className={`registration-title sign-in-title ${this.state.signIn ? 'active-type' : 'disabled-type'}`}
-							onClick={e => this.setState({ signIn: true, signUp: false })}>
-							Sign In
-						</div>
-					</li>
-					<li className="inline-block">
-						<input
-							onChange={e => this.setState({ username: e.target.value })}
-							type="text"
-							className={`form-field username ${this.state.signIn && 'active-sign-in'}`}
-							placeholder="Username"/>
-					</li>
-					<li className="inline-block">
-						<input
-							onChange={e => this.setState({ password: e.target.value })}
-							type="password"
-							className={`form-field password ${this.state.signIn && 'active-sign-in'}`}
-							placeholder="Password"/>
-					</li>
-					<li className="inline-block">
-						<button
-							type="submit"
-							className={`submit-btn ${this.state.signIn && 'active-sign-in'}`}>
-							Submit
-						</button>
+						<a href='https://github.com/login/oauth/authorize?scope=user:email&client_id=4bc852f1f3bfb0234ccf' className="sign-in-with-github">
+							Login with <img src={GithubIcon} alt="github-icon" className="github-icon" />
+						</a>
 					</li>
 				</ul>
-			</form>
+			</div>
 		);
 	}
 
@@ -112,5 +131,5 @@ export function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-	postUser, addFlashMessage, destroyFlashMessage, postSession, destroySession
+	postUser, addFlashMessage, destroyFlashMessage, postSession, destroySession, authWithGithub
 })(Authentication);

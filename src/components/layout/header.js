@@ -8,6 +8,8 @@ import Authentication from './header/authentication';
 // Shows navigation bar for user
 export default class Header extends Component {
 	render() {
+		let githubSessionCode = this.props.githubSessionCode;
+
 		return (
 			<div className="header">
 				<nav className="navbar navbar-default">
@@ -24,7 +26,7 @@ export default class Header extends Component {
 								</ul>
 							</div>
 							<div className="col-md-10 right-side">
-								<Authentication />
+								<Authentication githubSessionCode={githubSessionCode && githubSessionCode}/>
 							</div>
 						</div>
 					</div>

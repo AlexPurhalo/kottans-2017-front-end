@@ -1,6 +1,5 @@
 // Node modules import
 import axios from 'axios';
-
 // Import of API url
 import { API } from '../constants/index';
 
@@ -42,4 +41,31 @@ export function destroySession() {
 	localStorage.removeItem('username');
 
 	return { type: DESTROY_SESSION_SUCCESS }
+}
+
+
+// Authentication via Github
+export function authWithGithub(sessionCode) {
+	console.log(sessionCode);
+
+	return function(dispatch) {
+		return axios.get(`${API}/auth/github/callback?code=${sessionCode}`)
+			.then(res => dispatch(authWithGithubSuccess(res.data)))
+			.catch(req => dispatch(authWithGithubFailure(req.response.data.errors)))
+	}
+}
+function authWithGithubSuccess(data) {
+	localStorage.setItem('jwt', data.access_token);
+	localStorage.setItem('userId', data.user_id);
+	localStorage.setItem('username', data.username);
+
+	return {
+		type: POST_SESSION_SUCCESS
+	};
+
+
+}
+
+function authWithGithubFailure(errors) {
+	console.log(errors)
 }
