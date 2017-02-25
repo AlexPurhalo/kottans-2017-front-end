@@ -42,7 +42,15 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, postsList: voting };
 
 		case ADD_USER_TO_PARTY_OR_REMOVE:
-			return { ...state, postsList: action.payload };
+			let postsWithPartyChanges = [];
+
+			state.postsList.map(post =>
+				post.id == action.payload.postId
+					? (post.eventGroup = action.payload.party) && postsWithPartyChanges.push(post)
+					: postsWithPartyChanges.push(post)
+			);
+
+			return { ...state, postsList: postsWithPartyChanges };
 
 		case ADD_USER_ANSWER_SUCCESS:
 			let postsAfterAnswer = [];

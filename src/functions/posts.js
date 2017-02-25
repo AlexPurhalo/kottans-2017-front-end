@@ -13,7 +13,7 @@ export function normalizePosts(data) {
 			comments: normalizeComments(post.comments),
 			withParty: post.with_party,
 			withVoting: post.with_voting,
-			eventGroup: post.party,
+			eventGroup: normalizeEventParty(post.party),
 			answerVariants: normalizeAnswerVariants(post.variants),
 			votingAnswers: normalizeVotingAnswers(post.voting_answers)
 		})
@@ -35,7 +35,7 @@ export function normalizePost(post) {
 		comments: normalizeComments(post.comments),
 		withParty: post.with_party,
 		withVoting: post.with_voting,
-		eventGroup: post.party,
+		eventGroup: normalizeEventParty(post.party),
 		answerVariants: normalizeAnswerVariants(post.variants),
 		votingAnswers: normalizeVotingAnswers(post.voting_answers)
 	}
@@ -49,6 +49,20 @@ export function normalizeVotes(votesArr) {
 	}
 
 	return normalizedVotes;
+}
+
+export function normalizeEventParty(party) {
+	if (party) {
+		let usersArr = [], normalizedParty = { id: party.id, users: usersArr };
+
+		party.users.map(user =>
+			usersArr.push({ id: user.id, username: user.username })
+		);
+
+		party = normalizedParty
+	}
+
+	return party;
 }
 
 export function findVotes(votesArr) {

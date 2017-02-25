@@ -20,7 +20,9 @@ import {
 import { API } from '../constants/index';
 
 // Functions import
-import { normalizePosts, normalizePost, normalizeComments, findVotes, normalizeVotingAnswers } from '../functions/posts';
+import {
+	normalizePosts, normalizePost, normalizeComments, findVotes, normalizeVotingAnswers, normalizeEventParty
+} from '../functions/posts';
 
 // For headers
 const headers = {
@@ -117,13 +119,15 @@ function postVoteFailure(errors) { console.log(errors) }
 export function addUserToPartyOrRemove(postId) {
 	return function(dispatch) {
 		return axios.post(`${API}/posts/${postId}/party`, {}, headers)
-			.then(res => dispatch(addUserToPartyOrRemoveSuccess(res.data)))
+			.then(res => dispatch(addUserToPartyOrRemoveSuccess(res.data, postId)))
+			.catch(req => console.log(req.response.data.errors));
 	}
 }
-function addUserToPartyOrRemoveSuccess(data) {
+function addUserToPartyOrRemoveSuccess(data, postId) {
+	console.log(normalizeEventParty(data));
 	return {
 		type: ADD_USER_TO_PARTY_OR_REMOVE,
-		payload: normalizePosts(data)
+		payload: { postId: postId, party: normalizeEventParty(data)}
 	}
 }
 
