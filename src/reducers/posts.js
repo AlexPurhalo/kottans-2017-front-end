@@ -31,7 +31,14 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, postsList: postsArr };
 
 		case POST_VOTE_SUCCESS:
-			return { ...state, postsList: action.payload };
+			let voting = [];
+			state.postsList.map(post => {
+				post.id == action.payload.postId
+					? (post.votes = action.payload.votes) && voting.push(post)
+					: voting.push(post)
+			});
+			return { ...state, postsList: voting };
+
 		case ADD_USER_TO_PARTY_OR_REMOVE:
 			return { ...state, postsList: action.payload };
 		case ADD_USER_ANSWER_SUCCESS:

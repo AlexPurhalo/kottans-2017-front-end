@@ -30,6 +30,7 @@ export function normalizePost(post) {
 		author: post.user.username,
 		categories: post.categories.map(category => category.name),
 		votes: findVotes(post.votes),
+		votesList: normalizeVotes(post.votes),
 		date: normalizeCreateDate(post.created_at),
 		comments: normalizeComments(post.comments),
 		withParty: post.with_party,
@@ -39,7 +40,18 @@ export function normalizePost(post) {
 		votingAnswers: normalizeVotingAnswers(post.voting_answers)
 	}
 }
-function findVotes(votesArr) {
+
+export function normalizeVotes(votesArr) {
+	let normalizedVotes = [], i;
+
+	for (i = 0; i < votesArr.length; i++) {
+		normalizedVotes.push({ like: votesArr[i].like, username: votesArr[i].user.username });
+	}
+
+	return normalizedVotes;
+}
+
+export function findVotes(votesArr) {
 	let likesCount = 0, dislikesCount = 0, i;
 
 	for (i = 0; i < votesArr.length; i++) {

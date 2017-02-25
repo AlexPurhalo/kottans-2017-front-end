@@ -20,7 +20,7 @@ import {
 import { API } from '../constants/index';
 
 // Functions import
-import { normalizePosts, normalizePost, normalizeComments } from '../functions/posts';
+import { normalizePosts, normalizePost, normalizeComments, findVotes } from '../functions/posts';
 
 // For headers
 const headers = {
@@ -86,7 +86,7 @@ export function postComment(postId, body) {
 	}
 }
 function postCommentSuccess(data, postId) {
-	console.log(data)
+	console.log(data);
 	return {
 		type: POST_COMMENT_SUCCESS,
 		payload: { postId: postId, comments: normalizeComments(data) }
@@ -100,16 +100,18 @@ function postCommentFailure(errors) {
 export function postVote(postId, like) {
 	return function(dispatch) {
 		return axios.put(`${API}/posts/${postId}/votes`, { like: like }, headers)
-			.then(res => dispatch(postVoteSuccess(res.data)))
-
+			.then(res => dispatch(postVoteSuccess(res.data, postId)))
+			.catch(req => dispatch(postVoteFailure(req.response.data.errors)))
 	}
 }
-function postVoteSuccess(data) {
+function postVoteSuccess(data, postId) {
+	console.log(findVotes(data));
 	return {
 		type: POST_VOTE_SUCCESS,
-		payload: normalizePosts(data)
+		payload: { postId: postId, votes: findVotes(data) }
 	}
 }
+function postVoteFailure(errors) { console.log(errors) }
 
 // Adds a user to event group
 export function addUserToPartyOrRemove(postId) {
@@ -141,7 +143,6 @@ function addUserAnswerSuccess(data) {
 
 // Update post's data
 export function updatePostData(postId, attributesObject) {
-	console.log(attributesObject);
 	let attributes = Object.keys(attributesObject), data;
 
 	attributes.map(attribute => {
