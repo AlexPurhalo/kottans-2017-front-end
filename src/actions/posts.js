@@ -20,7 +20,7 @@ import {
 import { API } from '../constants/index';
 
 // Functions import
-import { normalizePosts, normalizePost } from '../functions/posts';
+import { normalizePosts, normalizePost, normalizeComments } from '../functions/posts';
 
 // For headers
 const headers = {
@@ -81,14 +81,19 @@ export function postComment(postId, body) {
 
 	return function(dispatch) {
 		return axios.post(`${API}/posts/${postId}/comments`, data, headers)
-			.then(res => dispatch(postCommentSuccess(res.data)))
+			.then(res => dispatch(postCommentSuccess(res.data, postId)))
+			.catch(req => dispatch(postCommentFailure(req.response.data.errors)))
 	}
 }
-function postCommentSuccess(data) {
+function postCommentSuccess(data, postId) {
+	console.log(data)
 	return {
 		type: POST_COMMENT_SUCCESS,
-		payload: normalizePosts(data)
+		payload: { postId: postId, comments: normalizeComments(data) }
 	}
+}
+function postCommentFailure(errors) {
+	console.log(errors)
 }
 
 // Adds a vote to post
@@ -145,7 +150,6 @@ export function updatePostData(postId, attributesObject) {
 		}
 	);
 
-	console.log(data); //sdfsdf
 	return function(dispatch) {
 		return axios.put(`${API}/posts/${postId}`, data, headers)
 			.then(res => dispatch(updatePostSuccess(res.data)))

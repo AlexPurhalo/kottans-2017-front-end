@@ -22,7 +22,14 @@ export default (state = INITIAL_STATE, action) => {
 		case POST_POST_SUCCESS:
 			return { ...state, postsList: action.payload };
 		case POST_COMMENT_SUCCESS:
-			return { ...state, postsList: action.payload };
+			let postsArr = [];
+			state.postsList.map(post => {
+				post.id == action.payload.postId
+					? (post.comments = action.payload.comments) && postsArr.push(post)
+					: postsArr.push(post)
+			});
+			return { ...state, postsList: postsArr };
+
 		case POST_VOTE_SUCCESS:
 			return { ...state, postsList: action.payload };
 		case ADD_USER_TO_PARTY_OR_REMOVE:

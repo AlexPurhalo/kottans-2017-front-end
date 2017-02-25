@@ -57,7 +57,7 @@ function normalizeCreateDate(date) {
 	return normalizedDate
 }
 
-function normalizeComments(comments) {
+export function normalizeComments(comments) {
 	let normalizedComments = [], i;
 
 	function normalizeCommentDate(date) {
