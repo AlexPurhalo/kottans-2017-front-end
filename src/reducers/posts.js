@@ -19,8 +19,10 @@ export default (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case FETCH_POSTS_SUCCESS:
 			return { ...state, postsList: action.payload };
+
 		case POST_POST_SUCCESS:
 			return { ...state, postsList: action.payload };
+
 		case POST_COMMENT_SUCCESS:
 			let postsArr = [];
 			state.postsList.map(post => {
@@ -41,16 +43,25 @@ export default (state = INITIAL_STATE, action) => {
 
 		case ADD_USER_TO_PARTY_OR_REMOVE:
 			return { ...state, postsList: action.payload };
+
 		case ADD_USER_ANSWER_SUCCESS:
-			return { ...state, postsList: action.payload };
+			let postsAfterAnswer = [];
+
+			state.postsList.map(post => {
+				post.id == action.payload.postId
+					? (post.votingAnswers = action.payload.votingAnswers) && postsAfterAnswer.push(post)
+					: postsAfterAnswer.push(post)
+			});
+
+			return { ...state, postsList: postsAfterAnswer };
+
 		case UPDATE_POST_SUCCESS:
 			let tempArr = [];
-
 			state.postsList.map(post => {
 				post.id == action.payload.id ? tempArr.push(action.payload) : tempArr.push(post);
 			});
-
 			return { ...state, postsList: tempArr};
+
 		default:
 			return state;
 	}

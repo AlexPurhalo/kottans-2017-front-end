@@ -101,7 +101,7 @@ function normalizeAnswerVariants(variants) {
 	return variantsArr;
 }
 
-function normalizeVotingAnswers(answers) {
+export function normalizeVotingAnswers(answers) {
 	let normalizedAnswers = [];
 
 	answers.map(answer => normalizedAnswers.push({
