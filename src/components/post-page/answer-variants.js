@@ -123,7 +123,12 @@ export default class AnswerVariants extends Component {
 										{this.variantsInputs(this.props.variants)}
 									</div>
 									<div className="col-md-6 right-side">
-										{answersCollection.length > 0 && this.graphic()}
+										{answersCollection.length > 0 ? (
+												<div>
+													Votes: {answersCollection.length}
+													{this.graphic()}
+												</div>
+											) : 'Still no votes'}
 									</div>
 								</div>
 							)
