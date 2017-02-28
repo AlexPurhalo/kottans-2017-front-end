@@ -24,6 +24,7 @@ import Comments from '../components/post-page/comments';
 import AddCommentForm from '../components/post-page/add-comment-form';
 import EventGroup from '../components/post-page/event-group';
 import AnswerVariants from '../components/post-page/answer-variants';
+import PostsPagination from '../components/post-page/posts-pagination';
 
 // Main page, show posts list
 class PostsPage extends Component {
@@ -91,6 +92,7 @@ class PostsPage extends Component {
 						</li>
 					)}
 				</ul>
+				<PostsPagination meta={this.props.meta}/>
 			</div>
 		);
 	}
@@ -111,7 +113,8 @@ function mapStateToProps(state) {
 	return {
 		posts: state.posts.postsList,
 		categories: state.categories.categoriesList,
-		authenticatedUser: state.session.authenticated
+		authenticatedUser: state.session.authenticated,
+		meta: state.posts.meta
 	}
 }
 

@@ -1,6 +1,6 @@
 // Initial states definition
 export const INITIAL_STATE = {
-	postsList: null, allowActions: false
+	postsList: null, allowActions: false, meta: null
 };
 
 // Action types import
@@ -18,10 +18,10 @@ import {
 export default (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case FETCH_POSTS_SUCCESS:
-			return { ...state, postsList: action.payload };
+			return { ...state, postsList: action.payload.posts, meta: action.payload.meta };
 
 		case POST_POST_SUCCESS:
-			return { ...state, postsList: action.payload };
+			return { ...state, postsList: action.payload.posts, meta: action.payload.meta };
 
 		case POST_COMMENT_SUCCESS:
 			let postsArr = [];

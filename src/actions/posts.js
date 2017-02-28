@@ -21,7 +21,8 @@ import { API } from '../constants/index';
 
 // Functions import
 import {
-	normalizePosts, normalizePost, normalizeComments, findVotes, normalizeVotingAnswers, normalizeEventParty
+	normalizePosts, normalizePost, normalizeComments, findVotes, normalizeVotingAnswers, normalizeEventParty,
+	normalizeMeta
 } from '../functions/posts';
 
 // For headers
@@ -31,18 +32,18 @@ const headers = {
 
 // Receives the posts list
 export function fetchPosts(categoryName) {
-	let category = '?category=Events';
-	if (categoryName) { category = ('/?category=' + adapteLink(categoryName))}
+	let category = '&category=Events';
+	if (categoryName) { category = ('&category=' + adapteLink(categoryName))}
 
 	return function(dispatch) {
-		return axios.get(`${API}/posts${category}`)
+		return axios.get(`${API}/posts?page=5&size=5${category}`)
 			.then(res => dispatch(fetchPostsSuccess(res.data)));
 	}
 }
 function fetchPostsSuccess(data) {
 	return {
 		type: FETCH_POSTS_SUCCESS,
-		payload: normalizePosts(data)
+		payload: { meta: normalizeMeta(data.meta), posts: normalizePosts(data.posts) },
 	}
 }
 
@@ -65,9 +66,10 @@ export function postPost(title, description, withParty, category, withVoting, vo
 	}
 }
 function postPostSuccess(data) {
+	let meta = { 	totalObjects: data.meta.total_objects, pageNum: 1, pageSize: 5 };
 	return {
 		type: POST_POST_SUCCESS,
-		payload: normalizePosts(data)
+		payload: { meta, posts: normalizePosts(data.posts)},
 	}
 }
 function postPostFailure(errors) {

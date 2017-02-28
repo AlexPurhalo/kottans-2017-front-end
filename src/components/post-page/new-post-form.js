@@ -136,6 +136,7 @@ export default class NewPostForm extends Component {
 					</div>
 				</div>
 				<input
+					autoFocus
 					onChange={this.handleTitle}
 					value={this.state.title}
 					type="text"

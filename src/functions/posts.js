@@ -124,3 +124,13 @@ export function normalizeVotingAnswers(answers) {
 
 	return normalizedAnswers;
 }
+
+export function normalizeMeta(meta) {
+	let metaData = {
+		totalObjects: parseInt(meta.total_objects),
+		pageNum: parseInt(meta.page_num),
+		pageSize: parseInt(meta.page_size)
+	};
+
+	return metaData
+}
