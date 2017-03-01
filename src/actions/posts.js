@@ -36,7 +36,7 @@ export function fetchPosts(categoryName) {
 	if (categoryName) { category = ('&category=' + adapteLink(categoryName))}
 
 	return function(dispatch) {
-		return axios.get(`${API}/posts?page=5&size=5${category}`)
+		return axios.get(`${API}/posts?page=1&size=5${category}`)
 			.then(res => dispatch(fetchPostsSuccess(res.data)));
 	}
 }

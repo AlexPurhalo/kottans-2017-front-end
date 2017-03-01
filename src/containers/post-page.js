@@ -92,7 +92,10 @@ class PostsPage extends Component {
 						</li>
 					)}
 				</ul>
-				<PostsPagination meta={this.props.meta}/>
+				<PostsPagination
+					currentPage={this.props.meta.pageNum}
+					pageSize={this.props.meta.pageSize}
+					totalObjects={this.props.meta.totalObjects} />
 			</div>
 		);
 	}
