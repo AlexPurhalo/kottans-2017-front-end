@@ -12,6 +12,7 @@ import {
 	addUserAnswer,
 	updatePostData
 } from '../actions/posts';
+
 import { fetchCategories } from '../actions/categories';
 
 // Components import
@@ -95,7 +96,8 @@ class PostsPage extends Component {
 				<PostsPagination
 					currentPage={this.props.meta.pageNum}
 					pageSize={this.props.meta.pageSize}
-					totalObjects={this.props.meta.totalObjects} />
+					totalObjects={this.props.meta.totalObjects}
+					fetchPosts={this.props.fetchPosts} />
 			</div>
 		);
 	}

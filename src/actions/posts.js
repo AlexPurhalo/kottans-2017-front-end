@@ -31,12 +31,14 @@ const headers = {
 };
 
 // Receives the posts list
-export function fetchPosts(categoryName) {
-	let category = '&category=Events';
-	if (categoryName) { category = ('&category=' + adapteLink(categoryName))}
+export function fetchPosts(categoryName, pageNum) {
+	let category = '&category=Events', size = 5, page = 1;
+
+	categoryName && (category = ('&category=' + adapteLink(categoryName)));
+	pageNum && (page = pageNum);
 
 	return function(dispatch) {
-		return axios.get(`${API}/posts?page=1&size=5${category}`)
+		return axios.get(`${API}/posts?page=${page}&size=5${category}`)
 			.then(res => dispatch(fetchPostsSuccess(res.data)));
 	}
 }

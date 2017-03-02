@@ -7,27 +7,33 @@ export default class PostsPagination extends Component {
 	findLastPage = (objectsCount, pageSize) => Math.round(objectsCount / pageSize);
 
 	nextPageNum = (actualPage, lastPage) => actualPage < lastPage && (
-		<li className="inline-block"><button>{actualPage + 1}</button></li>
+		<button onClick={e => this.props.fetchPosts(null, actualPage+1)}>{actualPage + 1}</button>
 	);
 
 	prevPageNum = (actualPage, firPage) => actualPage > firPage && (
-		<li className="inline-block"><button>{actualPage - 1}</button></li>
+		<button onClick={e => this.props.fetchPosts(null, actualPage-1)}>{actualPage - 1}</button>
 	);
 
 	lastPageNum = (actualPage, lastPage) => actualPage + 2 < lastPage && (
-		<li className="inline-block"><button>{actualPage + 3 == lastPage ? lastPage : `...${lastPage}`}</button></li>
+		<button onClick={e => this.props.fetchPosts(null, lastPage)}>
+			{actualPage + 3 == lastPage ? lastPage : `...${lastPage}`}
+		</button>
 	);
 
 	firstPageNum = (actualPage, firstPage) => actualPage - 2 > firstPage && (
-		<li className="inline-block"><button>{actualPage - 3 == firstPage ? firstPage : `...${firstPage}` }</button></li>
+		<button onClick={e => this.props.fetchPosts(null, 1)}>
+			{actualPage - 3 == firstPage ? firstPage : `...${firstPage}` }
+		</button>
 	);
 
-	nextPageSwitch = () => <li className="inline-block"><button>next →</button></li>;
+	nextPageSwitch = actualPage =>
+		<button onClick={e => this.props.fetchPosts(null, actualPage + 1)}>next →</button>;
 
-	prevPageSwitch = () => <li className="inline-block"><button>← prev</button></li>;
+	prevPageSwitch = actualPage =>
+		<button onClick={e => this.props.fetchPosts(null, actualPage - 1)}>← prev</button>;
 
 	currentPageNum = (currentPage) => (
-		<li className="inline-block"><button className="active">{currentPage}</button></li>
+		<button className="active">{currentPage}</button>
 	);
 
 	render() {
@@ -46,8 +52,8 @@ export default class PostsPagination extends Component {
 		const lastPageNum = this.lastPageNum(currentPage, lastPage),
 			firstPageNum = this.firstPageNum(currentPage, firPage);
 
-		const prevPageSwitch = this.prevPageSwitch(),
-			nextPageSwitch = this.nextPageSwitch();
+		const prevPageSwitch = this.prevPageSwitch(currentPage),
+			nextPageSwitch = this.nextPageSwitch(currentPage);
 
 		const paginationItems = [
 			prevPageSwitch,
@@ -64,7 +70,11 @@ export default class PostsPagination extends Component {
 		return (
 			<div className="container">
 				<div className="posts-pagination-section">
-					<ul className="inline-list">{paginationItems}</ul>
+					<ul className="inline-list">
+						<li className="inline-block">
+							{paginationItems.map(item => item)}
+						</li>
+					</ul>
 				</div>
 			</div>
 		);
