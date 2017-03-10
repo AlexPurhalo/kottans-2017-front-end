@@ -4,7 +4,7 @@ import React, {Component} from "react";
 
 // Shows pagination for the posts list
 export default class PostsPagination extends Component {
-	findLastPage = (objectsCount, pageSize) => Math.round(objectsCount / pageSize);
+	findLastPage = (objectsCount, pageSize) => Math.ceil(objectsCount / pageSize);
 
 	nextPageNum = (actualPage, lastPage) => actualPage < lastPage && (
 		<button onClick={e => this.props.fetchPosts(null, actualPage+1)}>{actualPage + 1}</button>
